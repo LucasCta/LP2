@@ -12,18 +12,17 @@
 8. \*Ignorando Formatação\*
 
 ### Outros testes: 
-- Nest
-  - Nest 2
-    - Nest 3 
-- [x] Marked
-- [ ] Unmarked
+- Lista
+  - Sublista 1
+    - Sublista 2
+- [x] Marcado
+- [ ] Não Marcado
 ```py 
 while True:
   print("Hello World")
 ```
-![](https://desenvolvimentoaberto.files.wordpress.com/2014/07/duke.png) [^2]
+![](https://desenvolvimentoaberto.files.wordpress.com/2014/07/duke.png) 
 ###### Não sei mais o que escrever...
 
-[^1]: Emoji shipit.
-[^2]: Imagem mascote java
+[^1]: Emoji shipit (e anotação).
    
