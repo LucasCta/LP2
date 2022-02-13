@@ -38,6 +38,15 @@ class Hello2DFrame extends JFrame {
         g2d.setPaint(Color.red);
         Rectangle rectangle = new Rectangle(w/2, h/2, w, h);
         g2d.draw(rectangle);
+        Rectangle rectangle2 = new Rectangle(0, 0, w/2, h/2);
+        g2d.draw(rectangle2);
+
+        g2d.setPaint(Color.green);
+        g2d.drawOval(w/4, h/4, w/2, h/2);
+        g2d.drawOval(w/3, (h/30)*13, w/32, h/32);
+        g2d.drawOval((w/30)*17, h/3, w/32, h/32);
+        g2d.drawOval((w/30)*13, 2*h/3, w/32, h/32);
+        g2d.drawOval(2*w/3, (h/30)*17, w/32, h/32);
 
     }
 }
