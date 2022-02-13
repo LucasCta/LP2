@@ -29,7 +29,7 @@ class Hello2DFrame extends JFrame {
 
         getContentPane().setBackground(new Color(176,132,93));
 
-        g2d.setPaint(Color.blue);
+        g2d.setPaint(Color.yellow);
         int w = getWidth();
         int h = getHeight();
         g2d.drawLine(0,0, w,h);
