@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Hello2DApp {
+public class Hello2DAppMod {
     public static void main (String[] args) {
         Hello2DFrame frame = new Hello2DFrame();
     }
