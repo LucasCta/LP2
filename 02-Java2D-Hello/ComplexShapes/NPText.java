@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Text {
+public class NPText {
   public static void main (String[] args) {
     Texto r1 = new Texto(1,1,1,"font","fontType",Color.red,Color.blue);
     r1.print();

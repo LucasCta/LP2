@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Ellipse2D.Double;
 
-public class ElipseApp {
+public class EllipseApp {
     public static void main (String[] args) {
         PaintFrame frame = new PaintFrame();
         frame.setVisible(true);
@@ -26,7 +26,7 @@ class PaintFrame extends JFrame {
                 }
             }
         );
-        this.setTitle("ElipseApp");
+        this.setTitle("EllipseApp");
         this.setSize(350, 350);
         this.e1 = new Ellipse(50,100, 100,30, Color.blue, Color.red);
         this.e2 = new Ellipse(30,50, 30,30, new Color(70,140,210), new Color(210,140,70));
