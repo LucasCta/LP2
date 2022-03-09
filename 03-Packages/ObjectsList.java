@@ -37,13 +37,17 @@ class PackFrame extends JFrame {
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
+                    int x = rand.nextInt(350);
+                    int y = rand.nextInt(350);
+                    int w = rand.nextInt(100);
+                    int h = rand.nextInt(100);
+                    int c1 = rand.nextInt(6);
+                    int c2 = rand.nextInt(6);
+                    if (evt.getKeyChar() == 'r') {
+                        rectList.add(new Rect(x,y,w,h, colorList.get(c1), colorList.get(c2)));
+                        repaint(); //outer.repaint()
+                    }
                     if (evt.getKeyChar() == 'e') {
-                        int x = rand.nextInt(350);
-                        int y = rand.nextInt(350);
-                        int w = rand.nextInt(100);
-                        int h = rand.nextInt(100);
-                        int c1 = rand.nextInt(6);
-                        int c2 = rand.nextInt(6);
                         ellipseList.add(new Ellipse(x,y,w,h, colorList.get(c1), colorList.get(c2)));
                         repaint(); //outer.repaint()
                     }
@@ -55,8 +59,13 @@ class PackFrame extends JFrame {
     }
     public void paint (Graphics g) {
         super.paint(g);
-        for (Ellipse e: this.ellipseList) {
-            e.paint(g);
+        for (int i = 0 ; i != ellipseList.size() + rectList.size() ; i++) {
+            if (ellipseList.size() > i) {
+              (ellipseList.get(i)).paint(g);
+            }
+            if (rectList.size() > i) {
+              (rectList.get(i)).paint(g);
+            }
         }
     }
 }
