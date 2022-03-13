@@ -3,16 +3,11 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Ellipse extends Figure{
-    private int x, y;
     private int w, h;
-    private Color lineColor, bgColor;
     public Ellipse (int x, int y, int w, int h, Color lineColor, Color bgColor) {
-        this.x = x;
-        this.y = y;
+        super(x,y,lineColor,bgColor);
         this.w = w;
         this.h = h;
-        this.lineColor = lineColor;
-        this.bgColor = bgColor;
     }
     public void print () {
         System.out.format("Elipse de tamanho (%d,%d) na posicao (%d,%d).\n",

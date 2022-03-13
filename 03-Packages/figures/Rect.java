@@ -2,18 +2,13 @@ package figures;
 import java.awt.*;
 
 public class Rect extends Figure{
-    private int x, y;
     private int w, h;
-    private Color lineColor, bgColor;
     public int area () {return w*h;}
     public void drag (int dx, int dy) {this.x += dx;this.y += dy;}
     public Rect (int x, int y, int w, int h, Color lineColor, Color bgColor) {
-        this.x = x;
-        this.y = y;
+        super(x,y,lineColor,bgColor);
         this.w = w;
         this.h = h;
-        this.lineColor = lineColor;
-        this.bgColor = bgColor;
     }
     public void print () {
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",

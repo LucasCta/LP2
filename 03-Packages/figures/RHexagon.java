@@ -2,21 +2,17 @@ package figures;
 import java.awt.*;
 
 public class RHexagon extends Figure{
-    private int x, y, r, a;
+    private int r, a;
     private int vx[] = {1,1,1,1,1,1};
     private int vy[] = {1,1,1,1,1,1};
-    private Color bgColor, lineColor;
-    public RHexagon (int x, int y, int r, int a, Color bg, Color ln) {
-      this.x = x;
-      this.y = y;
+    public RHexagon (int x, int y, int r, int a, Color lineColor, Color bgColor) {
+      super(x,y,lineColor,bgColor);
       this.r = r;
       this.a = a;
       for (int i = 0; i < 6; i++){
         this.vx[i] = (int)(vx[i]*r*Math.cos(Math.toRadians(a+i*60))) + x;
         this.vy[i] = (int)(vy[i]*r*Math.sin(Math.toRadians(a+i*60))) + y;
       }
-      this.bgColor = bg;
-      this.lineColor = ln;
     }
     public void print () {
       System.out.format("Hexagon at (%d,%d), Radius %d, Rotation %d, with Vertices: ",
