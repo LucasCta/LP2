@@ -1,6 +1,5 @@
 package figures;
 import java.awt.*;
-import java.util.*;
 
 public class RHexagon {
     private int x, y, r, a;
