@@ -2,7 +2,7 @@ package figures;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-public class Ellipse {
+public class Ellipse extends Figure{
     private int x, y;
     private int w, h;
     private Color lineColor, bgColor;

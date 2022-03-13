@@ -1,7 +1,7 @@
 package figures;
 import java.awt.*;
 
-public class RHexagon {
+public class RHexagon extends Figure{
     private int x, y, r, a;
     private int vx[] = {1,1,1,1,1,1};
     private int vy[] = {1,1,1,1,1,1};
