@@ -7,12 +7,12 @@ import figures.*;
 
 class ObjectsList {
     public static void main (String[] args) {
-        PackFrame frame = new PackFrame();
+        ObjList frame = new ObjList();
         frame.setVisible(true);
     }
 }
 
-class PackFrame extends JFrame {
+class ObjList extends JFrame {
     ArrayList<Rect> rectList = new ArrayList<Rect>();
     ArrayList<Ellipse> ellipseList = new ArrayList<Ellipse>();
     ArrayList<Color> colorList = new ArrayList<Color>(){
@@ -26,7 +26,7 @@ class PackFrame extends JFrame {
       }
     };
     Random rand = new Random();
-    PackFrame () {
+    ObjList () {
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
