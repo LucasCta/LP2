@@ -5,7 +5,7 @@ public abstract class Figure {
     public int x, y;
     public Color lineColor, bgColor;
     public abstract void paint (Graphics g);
-    Figure (int x, int y, Color lineColor, Color bgColor){
+    public Figure (int x, int y, Color lineColor, Color bgColor){
         this.x = x;
         this.y = y;
         this.lineColor = lineColor;
