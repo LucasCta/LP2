@@ -79,10 +79,10 @@ Rhexagon* rhexagon_new (int x, int y, int r, int a, Color lineColor, Color bgCol
     sup->bg = bgColor;
     this->r = r;
     this->a = a;
-    for (int i = 0; i < 6; i++){
-        this->vx[i] = (int)(r*cos((a+i*60)*180/M_PI)) + x;
-        this->vy[i] = (int)(r*sin((a+i*60)*180/M_PI)) + y;
-    }
+    //for (int i = 0; i < 6; i++){
+    //    this->vx[i] = (int)(r*cos((a+i*60)*180/M_PI)) + x;
+    //    this->vy[i] = (int)(r*sin((a+i*60)*180/M_PI)) + y;
+    //}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
