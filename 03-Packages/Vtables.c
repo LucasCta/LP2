@@ -19,11 +19,19 @@ Color* color_new (int x, int y, int z) {
 
 struct Figure;
 typedef void (* Figure_Print) (struct Figure*);
+typedef int (* Figure_Area) (struct Figure*);
+typedef int (* Figure_Perimeter) (struct Figure*);
+
+typedef struct {
+    void (* print) (struct Figure*);
+    int (* area) (struct Figure*);
+    int (* perimeter) (struct Figure*);
+} Figure_vtable;
 
 typedef struct Figure {
     int x, y;
     Color fg, bg;
-    void (* print) (struct Figure*);
+    Figure_vtable* vtable;
 } Figure;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,10 +48,29 @@ void Ellipse_print (Ellipse* this) {
     printf("Cores: (%d,%d,%d), (%d,%d,%d)\n\n", sup->fg.r, sup->fg.g, sup->fg.b, sup->bg.r, sup->bg.g, sup->bg.b); 
 }
 
+int Ellipse_area (Ellipse* this) {
+    Figure* sup = (Figure*) this;
+    return (int)(this->w * this->h * M_PI);
+}
+
+int Ellipse_perimeter (Ellipse* this){
+    Figure* sup = (Figure*) this;
+    //Approximation as there is no simple formula for an ellipse perimeter
+    double h = pow(this->w - this->h,2)/pow(this->w + this->h,2);
+    return (int)(M_PI*(this->w + this->h)*(1+((3*h)/(10+sqrt(4-3*h)))));
+}
+
+
+Figure_vtable ellipse_vtable = {
+    (Figure_Print) Ellipse_print,
+    (Figure_Area) Ellipse_area,
+    (Figure_Perimeter) Ellipse_perimeter
+};
+
 Ellipse* ellipse_new (int x, int y, int w, int h, Color lineColor, Color bgColor) {
     Ellipse* this = malloc(sizeof(Ellipse));
     Figure* sup = (Figure*) this;
-    sup->print = (Figure_Print) Ellipse_print;
+    sup->vtable = &ellipse_vtable;
     sup->x = x;
     sup->y = y;
     sup->fg = lineColor;
@@ -69,10 +96,27 @@ void Rhexagon_print (Rhexagon* this) {
     printf("\nCores: (%d,%d,%d), (%d,%d,%d)\n\n", sup->fg.r, sup->fg.g, sup->fg.b, sup->bg.r, sup->bg.g, sup->bg.b); 
 }
 
+
+int Rhexagon_area (Rhexagon* this) {
+    Figure* sup = (Figure*) this;
+    return (int)(3*sqrt(3)*pow(this->r,2)/2);
+}
+
+int Rhexagon_perimeter (Rhexagon* this) {
+    Figure* sup = (Figure*) this;
+    return (int)(6*this->r);
+}
+
+Figure_vtable rhexagon_vtable = {
+    (Figure_Print) Rhexagon_print,
+    (Figure_Area) Rhexagon_area,
+    (Figure_Perimeter) Rhexagon_perimeter
+};
+
 Rhexagon* rhexagon_new (int x, int y, int r, int a, Color lineColor, Color bgColor) {
     Rhexagon* this = malloc(sizeof(Rhexagon));
     Figure* sup = (Figure*) this;
-    sup->print = (Figure_Print) Rhexagon_print;
+    sup->vtable = &rhexagon_vtable;
     sup->x = x;
     sup->y = y;
     sup->fg = lineColor;
@@ -100,7 +144,9 @@ void main (void) {
         (Figure*) rhexagon_new(170,40,60,0,*colors[0],*colors[2])
     };
     for (int i=0; i<4; i++) {
-        figs[i]->print(figs[i]);
+        figs[i]->vtable->print(figs[i]);
+        printf("Area: %d",figs[i]->vtable->area(figs[i]));
+        printf("\nPerimeter: %d\n\n",figs[i]->vtable->perimeter(figs[i]));
         free(figs[i]);
     }
 }
