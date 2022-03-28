@@ -1,25 +1,23 @@
 package figures;
 import java.awt.*;
 
-public class Rect extends Figure{
-    private int w, h;
-    public int area () {return w*h;}
-    public void drag (int dx, int dy) {this.x += dx;this.y += dy;}
-    public Rect (int x, int y, int w, int h, Color lineColor, Color bgColor) {
-        super(x,y,lineColor,bgColor);
-        this.w = w;
-        this.h = h;
+public class Line extends Figure{
+    private int v1[] = {1,1};
+    private int v2[] = {1,1};
+    public Line (int v1x, int v1y, int v2x, int v2y, Color lineColor) {
+        super(v1x+v2x/2, v1y+v2y/2, lineColor, lineColor);
+        this.v1[0] = v1x;
+        this.v1[1] = v1y;
+        this.v2[0] = v2x;
+        this.v2[1] = v2y;
     }
     public void print () {
-        System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
-            this.w, this.h, this.x, this.y);
-        System.out.format("Background Color: %s, Line Color: %s",this.bgColor,this.lineColor);
+        System.out.format("Linha com vertices em (%d,%d) e (%d,%d), de Cor %s.\n",
+            this.v1[0], this.v1[1], this.v2[0], this.v2[1], this.lineColor);
     }
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(this.bgColor);
-        g2d.fillRect(this.x,this.y, this.w,this.h);
         g2d.setColor(this.lineColor);
-        g2d.drawRect(this.x,this.y, this.w,this.h);
+        g2d.drawLine(this.v1[0], this.v1[1], this.v2[0], this.v2[1]);
     }
 }

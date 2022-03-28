@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import figures.*;
 
-class Subclassing {
+class Project1 {
     public static void main (String[] args) {
         ArrFigures frame = new ArrFigures();
         frame.setVisible(true);
@@ -52,6 +52,16 @@ class ArrFigures extends JFrame {
                     }
                     if (evt.getKeyChar() == 'h'){
                         figuresList.add(new RHexagon(x,y,w,h, colorList.get(c1), colorList.get(c2)));
+                        repaint(); //outer.repaint()
+                    }                    
+                    if (evt.getKeyChar() == 't'){
+                        figuresList.add(new Triangle(x,y,w,h, colorList.get(c1), colorList.get(c2)));
+                        repaint(); //outer.repaint()
+                    }
+                    if (evt.getKeyChar() == 'l'){
+                        int x2 = rand.nextInt(350);
+                        int y2 = rand.nextInt(350);
+                        figuresList.add(new Line(x,y,x2,y2, colorList.get(c1)));
                         repaint(); //outer.repaint()
                     }
                 }
