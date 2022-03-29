@@ -34,8 +34,10 @@ public class RHexagon extends Figure{
     }
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(this.bgColor);
-        g2d.fillPolygon(new Polygon(vx, vy, 6));
+        if (this.bgColor != null){
+          g2d.setColor(this.bgColor);
+          g2d.fillPolygon(new Polygon(vx, vy, 6));
+        }
         g2d.setColor(this.lineColor);
         g2d.drawPolygon(new Polygon(vx, vy, 6));
     }

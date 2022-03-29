@@ -74,8 +74,8 @@ class ArrFigures extends JFrame {
                 public void keyPressed (KeyEvent evt) {
                     int x = mouse[0];
                     int y = mouse[1];
-                    int w = rand.nextInt(50);
-                    int h = rand.nextInt(50);
+                    int w = rand.nextInt(40) + 10;
+                    int h = rand.nextInt(40) + 10;
                     int c1 = rand.nextInt(6);
                     int c2 = rand.nextInt(6);
                     if (evt.getKeyChar() == 'r') {
@@ -95,8 +95,8 @@ class ArrFigures extends JFrame {
                         repaint(); //outer.repaint()
                     }
                     if (evt.getKeyChar() == 'l'){
-                        int x2 = rand.nextInt(350);
-                        int y2 = rand.nextInt(350);
+                        int x2 = x + rand.nextInt(100) - 50;
+                        int y2 = y + rand.nextInt(100) - 50;
                         figuresList.add(new Line(x,y,x2,y2, colorList.get(c1)));
                         repaint(); //outer.repaint()
                     }

@@ -34,8 +34,10 @@ public class Triangle extends Figure{
     }
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(this.bgColor);
-        g2d.fillPolygon(new Polygon(vx, vy, 3));
+        if (this.bgColor != null){
+          g2d.setColor(this.bgColor);
+          g2d.fillPolygon(new Polygon(vx, vy, 3));
+        }
         g2d.setColor(this.lineColor);
         g2d.drawPolygon(new Polygon(vx, vy, 3));
     }
