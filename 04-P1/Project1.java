@@ -58,6 +58,14 @@ class ArrFigures extends JFrame {
                         focus = fig;
                     }
                 }
+                figuresList.add(focus);
+                for (Figure fig: figuresList){
+                    if (fig == focus){
+                        figuresList.remove(focus);
+                        break;
+                    } 
+                }
+                focus = figuresList.get(figuresList.size()-1); 
                 repaint(); //outer.repaint()
             }
         });
