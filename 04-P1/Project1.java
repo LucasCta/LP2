@@ -15,6 +15,7 @@ class Project1 {
 class ArrFigures extends JFrame {
     Figure focus = null;
     Figure highlight = null;
+    int mouse[] = {0,0};
     ArrayList<Figure> figuresList= new ArrayList<Figure>();
     ArrayList<Color> colorList = new ArrayList<Color>(){
       {
@@ -34,7 +35,13 @@ class ArrFigures extends JFrame {
                     System.exit(0);
                 }
             }
-        );
+        );        
+        this.addMouseMotionListener(new MouseAdapter() {
+            public void mouseMoved (MouseEvent e) {
+                mouse[0] = e.getX();
+                mouse[1] = e.getY();
+            }
+        });
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed (MouseEvent e) {
                 if (focus != null){
@@ -57,8 +64,8 @@ class ArrFigures extends JFrame {
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
-                    int x = rand.nextInt(350);
-                    int y = rand.nextInt(350);
+                    int x = mouse[0];
+                    int y = mouse[1];
                     int w = rand.nextInt(50);
                     int h = rand.nextInt(50);
                     int c1 = rand.nextInt(6);
