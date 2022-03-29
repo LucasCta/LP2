@@ -58,14 +58,16 @@ class ArrFigures extends JFrame {
                         focus = fig;
                     }
                 }
-                figuresList.add(focus);
-                for (Figure fig: figuresList){
-                    if (fig == focus){
-                        figuresList.remove(focus);
-                        break;
-                    } 
+                if (focus != null) {
+                    figuresList.add(focus);
+                    for (Figure fig: figuresList){
+                        if (fig == focus){
+                            figuresList.remove(focus);
+                            break;
+                        } 
+                    }
+                    focus = figuresList.get(figuresList.size()-1); 
                 }
-                focus = figuresList.get(figuresList.size()-1); 
                 repaint(); //outer.repaint()
             }
         });
@@ -104,7 +106,19 @@ class ArrFigures extends JFrame {
                         figuresList.remove(focus);
                         focus = null;
                         highlight = null;
-                        repaint();
+                        repaint(); //outer.repaint()
+                    }
+                    for (int i = 0; i < 6; i++){
+                        char c[] = {'1','2','3','4','5','6'};
+                        if (evt.getKeyChar() == c[i] && focus != null){
+                            for (Figure fig: figuresList){
+                                if (fig == focus){
+                                    fig.bgColor = colorList.get(i);
+                                    focus = fig;
+                                    repaint(); //outer.repaint()
+                                } 
+                            }
+                        }
                     }
                 }
             }
