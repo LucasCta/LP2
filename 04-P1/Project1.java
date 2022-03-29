@@ -92,6 +92,12 @@ class ArrFigures extends JFrame {
                         figuresList.add(new Line(x,y,x2,y2, colorList.get(c1)));
                         repaint(); //outer.repaint()
                     }
+                    if (evt.getKeyChar() == 'x' && focus != null){
+                        figuresList.remove(focus);
+                        focus = null;
+                        highlight = null;
+                        repaint();
+                    }
                 }
             }
         );

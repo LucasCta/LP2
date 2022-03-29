@@ -6,7 +6,7 @@ public class RHexagon extends Figure{
     private int vx[] = {1,1,1,1,1,1};
     private int vy[] = {1,1,1,1,1,1};
     public RHexagon (int x, int y, int r, int rot, Color lineColor, Color bgColor) {
-      super(x,y,lineColor, Color.white);
+      super(x,y,lineColor,bgColor);
       this.r = r;
       this.rot = rot;
       for (int i = 0; i < 6; i++){
