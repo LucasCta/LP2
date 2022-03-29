@@ -13,6 +13,8 @@ class Project1 {
 }
 
 class ArrFigures extends JFrame {
+    Figure focus = null;
+    Figure highlight = null;
     ArrayList<Figure> figuresList= new ArrayList<Figure>();
     ArrayList<Color> colorList = new ArrayList<Color>(){
       {
@@ -33,13 +35,32 @@ class ArrFigures extends JFrame {
                 }
             }
         );
+        this.addMouseListener(new MouseAdapter() {
+            public void mousePressed (MouseEvent e) {
+                if (focus != null){
+                    focus = null;
+                    highlight= null;
+                    repaint(); //outer.repaint()
+                }
+                for (Figure fig: figuresList) {
+                    if (e.getX() > fig.container[0] && e.getX() < fig.container[1] 
+                        &&  e.getY() > fig.container[2] && e.getY() < fig.container[3]){
+                        highlight = new Rect(fig.container[0],fig.container[2],
+                            fig.container[1]-fig.container[0],fig.container[3]-fig.container[2],
+                            Color.pink,null); 
+                        focus = fig;
+                    }
+                }
+                repaint(); //outer.repaint()
+            }
+        });
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
                     int x = rand.nextInt(350);
                     int y = rand.nextInt(350);
-                    int w = rand.nextInt(100);
-                    int h = rand.nextInt(100);
+                    int w = rand.nextInt(50);
+                    int h = rand.nextInt(50);
                     int c1 = rand.nextInt(6);
                     int c2 = rand.nextInt(6);
                     if (evt.getKeyChar() == 'r') {
@@ -74,6 +95,9 @@ class ArrFigures extends JFrame {
         super.paint(g);
         for (Figure fig: this.figuresList) {
             fig.paint(g);
+            if (highlight != null){
+                highlight.paint(g);
+            }
         }
     }
 }

@@ -8,6 +8,10 @@ public class Ellipse extends Figure{
         super(x,y,lineColor,bgColor);
         this.w = w;
         this.h = h;
+        this.container[0] = x;
+        this.container[1] = x+w;
+        this.container[2] = y;
+        this.container[3] = y+h;
     }
     public void print () {
         System.out.format("Elipse de tamanho (%d,%d) na posicao (%d,%d).\n",

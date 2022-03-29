@@ -12,6 +12,16 @@ public class RHexagon extends Figure{
       for (int i = 0; i < 6; i++){
         this.vx[i] = (int)(vx[i]*r*Math.cos(Math.toRadians(rot+i*60))) + x;
         this.vy[i] = (int)(vy[i]*r*Math.sin(Math.toRadians(rot+i*60))) + y;
+      }   
+      this.container[0] = vx[0];
+      this.container[1] = vx[0];
+      this.container[2] = vy[0];
+      this.container[3] = vy[0];    
+      for (int i = 1; i < 6; i++){
+        if (this.vx[i] < this.container[0]){this.container[0]=this.vx[i];}
+        if (this.vx[i] > this.container[1]){this.container[1]=this.vx[i];}
+        if (this.vy[i] < this.container[2]){this.container[2]=this.vy[i];}
+        if (this.vy[i] > this.container[3]){this.container[3]=this.vy[i];}
       }
     }
     public void print () {

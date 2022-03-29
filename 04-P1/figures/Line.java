@@ -10,6 +10,10 @@ public class Line extends Figure{
         this.v1[1] = v1y;
         this.v2[0] = v2x;
         this.v2[1] = v2y;
+        if (v1x < v2x){this.container[0] = v1x; this.container[1] = v2x;}
+        else{this.container[1] = v1x; this.container[0] = v2x;}
+        if (v1y < v2y){this.container[2] = v1y; this.container[3] = v2y;}
+        else{this.container[3] = v1y; this.container[2] = v2y;}
     }
     public void print () {
         System.out.format("Linha com vertices em (%d,%d) e (%d,%d), de Cor %s.\n",
