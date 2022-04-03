@@ -17,16 +17,14 @@ class ArrFigures extends JFrame {
     Figure highlight = null;
     int mouse[] = {0,0};
     ArrayList<Figure> figuresList= new ArrayList<Figure>();
-    ArrayList<Color> colorList = new ArrayList<Color>(){
-      {
+    ArrayList<Color> colorList = new ArrayList<Color>(){{
         add(Color.blue);
         add(Color.red);
         add(Color.yellow);
         add(Color.green);
         add(Color.white);
         add(Color.black);
-      }
-    };
+    }};
     Random rand = new Random();
     ArrFigures () {
         this.addWindowListener (
@@ -47,7 +45,6 @@ class ArrFigures extends JFrame {
                 if (focus != null){
                     focus = null;
                     highlight= null;
-                    repaint(); //outer.repaint()
                 }
                 for (Figure fig: figuresList) {
                     if (e.getX() > fig.container[0] && e.getX() < fig.container[1] 
@@ -60,12 +57,7 @@ class ArrFigures extends JFrame {
                 }
                 if (focus != null) {
                     figuresList.add(focus);
-                    for (Figure fig: figuresList){
-                        if (fig == focus){
-                            figuresList.remove(focus);
-                            break;
-                        } 
-                    }
+                    figuresList.remove(focus);
                     focus = figuresList.get(figuresList.size()-1); 
                 }
                 repaint(); //outer.repaint()
@@ -82,44 +74,42 @@ class ArrFigures extends JFrame {
                     int c2 = rand.nextInt(6);
                     if (evt.getKeyChar() == 'r') {
                         figuresList.add(new Rect(x,y,w,h, colorList.get(c1), colorList.get(c2)));
-                        repaint(); //outer.repaint()
                     }
                     if (evt.getKeyChar() == 'e') {
                         figuresList.add(new Ellipse(x,y,w,h, colorList.get(c1), colorList.get(c2)));
-                        repaint(); //outer.repaint()
                     }
                     if (evt.getKeyChar() == 'h'){
                         figuresList.add(new RHexagon(x,y,w,h, colorList.get(c1), colorList.get(c2)));
-                        repaint(); //outer.repaint()
                     }                    
                     if (evt.getKeyChar() == 't'){
                         figuresList.add(new Triangle(x,y,w,h, colorList.get(c1), colorList.get(c2)));
-                        repaint(); //outer.repaint()
                     }
                     if (evt.getKeyChar() == 'l'){
                         int x2 = x + rand.nextInt(100) - 50;
                         int y2 = y + rand.nextInt(100) - 50;
                         figuresList.add(new Line(x,y,x2,y2, colorList.get(c1)));
-                        repaint(); //outer.repaint()
                     }
                     if (evt.getKeyChar() == 'x' && focus != null){
                         figuresList.remove(focus);
                         focus = null;
                         highlight = null;
-                        repaint(); //outer.repaint()
                     }
                     for (int i = 0; i < 6; i++){
                         char c[] = {'1','2','3','4','5','6'};
                         if (evt.getKeyChar() == c[i] && focus != null){
                             for (Figure fig: figuresList){
                                 if (fig == focus){
-                                    fig.bgColor = colorList.get(i);
-                                    focus = fig;
-                                    repaint(); //outer.repaint()
+                                    if(evt.isControlDown()){
+                                        fig.lineColor = colorList.get(i);
+                                    }
+                                    else{
+                                        fig.bgColor = colorList.get(i);
+                                    }
                                 } 
                             }
                         }
                     }
+                    repaint(); //outer.repaint()
                 }
             }
         );
