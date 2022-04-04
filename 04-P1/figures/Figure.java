@@ -3,10 +3,10 @@ import java.awt.*;
 
 public abstract class Figure implements Cloneable {
     public int x, y;
+    public boolean highlight = false;
     public Color lineColor, bgColor;
     public abstract void sizeChange (int a, boolean b);
     public abstract boolean isInside (int x, int y);
-    public abstract Figure copy ();
     public abstract void paint (Graphics g);    
     public void drag (int x, int y){
         this.x = x;

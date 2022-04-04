@@ -9,9 +9,6 @@ public class Ellipse extends Figure{
         this.w = w;
         this.h = h;
     }
-    public Ellipse copy () {
-        return new Ellipse(this.x, this.y, this.w, this.h, this.lineColor, this.bgColor);
-    }
     public void sizeChange (int a, boolean b){
         if (b) {this.w += a;}
         else {this.h += a;}
@@ -34,5 +31,9 @@ public class Ellipse extends Figure{
         }
         g2d.setColor(this.lineColor);
         g2d.draw(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
+        if (this.highlight == true){
+            g2d.setColor(Color.red);
+            g2d.draw(new Ellipse2D.Double(this.x-3,this.y-3,this.w+6,this.h+6));
+        }
     }
 }

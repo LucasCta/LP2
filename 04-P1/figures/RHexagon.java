@@ -22,9 +22,6 @@ public class RHexagon extends Figure{
         this.y = y;
         setVertices();
     };
-    public RHexagon copy () {
-      return new RHexagon(this.x, this.y, this.r, this.rot, this.lineColor, this.bgColor);
-    }
     public void sizeChange (int a, boolean b){
         this.r += a;
         if (this.r < 10){this.r = 10;}
@@ -49,5 +46,13 @@ public class RHexagon extends Figure{
         }
         g2d.setColor(this.lineColor);
         g2d.drawPolygon(new Polygon(vx, vy, 6));
+        if (this.highlight == true){
+          g2d.setColor(Color.red);
+          this.r += 4;
+          setVertices();
+          g2d.drawPolygon(new Polygon(vx, vy, 6));
+          this.r -= 4;
+          setVertices();
+        }
     }
 }

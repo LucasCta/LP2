@@ -17,9 +17,6 @@ public class Triangle extends Figure{
       this.rot = rot;
       setVertices();
     }
-    public Triangle copy () {
-      return new Triangle(this.x, this.y, this.r, this.rot, this.lineColor, this.bgColor);
-    }
     public void drag (int x, int y){
       this.x = x;
       this.y = y;
@@ -49,5 +46,13 @@ public class Triangle extends Figure{
         }
         g2d.setColor(this.lineColor);
         g2d.drawPolygon(new Polygon(vx, vy, 3));
+        if (this.highlight == true){
+          g2d.setColor(Color.red);
+          this.r += 4;
+          setVertices();
+          g2d.drawPolygon(new Polygon(vx, vy, 3));
+          this.r -= 4;
+          setVertices();
+        }
     }
 }

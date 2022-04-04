@@ -8,9 +8,6 @@ public class Rect extends Figure{
         this.w = w;
         this.h = h;
     }
-    public Rect copy () {
-        return new Rect(this.x, this.y, this.w, this.h, this.lineColor, this.bgColor);
-    }
     public void sizeChange (int a, boolean b){
         if (b) {this.w += a;}
         else {this.h += a;}
@@ -33,5 +30,9 @@ public class Rect extends Figure{
         }
         g2d.setColor(this.lineColor);
         g2d.drawRect(this.x,this.y, this.w,this.h);
+        if (this.highlight == true){
+            g2d.setColor(Color.red);
+            g2d.drawRect(this.x-3,this.y-3,this.w+6,this.h+6);
+        }
     }
 }

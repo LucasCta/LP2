@@ -14,7 +14,6 @@ class Project1 {
 
 class ArrFigures extends JFrame {
     Figure focus = null;
-    Figure highlight = null;
     int mouse[] = {0,0};
     ArrayList<Figure> figuresList= new ArrayList<Figure>();
     ArrayList<Color> colorList = new ArrayList<Color>(){{
@@ -37,17 +36,16 @@ class ArrFigures extends JFrame {
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed (MouseEvent e) {
                 if (focus != null){
+                    focus.highlight = false;
                     focus = null;
-                    highlight= null;
                 }
                 for (Figure fig: figuresList) {
                     //if (fig.isInside(e.getX(),e.getY())){
-                    focus = fig;
-                    highlight = fig.copy();
-                    highlight.bgColor = null;
-                    highlight.lineColor = Color.red;
-                    highlight.sizeChange(1,true);
-                    highlight.sizeChange(1,false); 
+                        if (focus != null){
+                            focus.highlight = false;
+                        }
+                        focus = fig;
+                        focus.highlight = true;
                     //}
                 }
                 if (focus != null) {
@@ -66,7 +64,6 @@ class ArrFigures extends JFrame {
             public void mouseDragged (MouseEvent e) {
                if (focus != null){
                    focus.drag(e.getX(),e.getY());
-                   highlight.drag(e.getX(),e.getY());
                    repaint(); //outer.repaint()
                 }
             }
@@ -95,19 +92,16 @@ class ArrFigures extends JFrame {
                     if (evt.getKeyChar() == 'x' && focus != null){
                         figuresList.remove(focus);
                         focus = null;
-                        highlight = null;
                     }
                     if (evt.getKeyChar() == '+' && focus != null){
                         boolean b = false;
                         if(evt.isControlDown()){b = true;}
                         focus.sizeChange(1,b); 
-                        highlight.sizeChange(1,b); 
                     }
                     if (evt.getKeyChar() == '-' && focus != null){
                         boolean b = false;
                         if(evt.isControlDown()){b = true;}
                         focus.sizeChange(-1,b); 
-                        highlight.sizeChange(-1,b); 
                     }
                     for (int i = 0; i < 6; i++){
                         char c[] = {'1','2','3','4','5','6'};
@@ -131,9 +125,6 @@ class ArrFigures extends JFrame {
         super.paint(g);
         for (Figure fig: this.figuresList) {
             fig.paint(g);
-            if (highlight != null){
-                highlight.paint(g);
-            }
         }
     }
 }
