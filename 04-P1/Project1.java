@@ -57,16 +57,23 @@ class ArrFigures extends JFrame {
             }
         });
         this.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged (MouseEvent e) {
+                if (focus != null){
+                    if (e.isControlDown()){
+                        focus.sizeChange(e.getX()-mouse[0],true);
+                        focus.sizeChange(e.getY()-mouse[1],false);
+                    }
+                    else focus.drag(e.getX(),e.getY()); 
+                    mouse[0] = e.getX();
+                    mouse[1] = e.getY();
+                    repaint(); //outer.repaint()
+                }
+            }
             public void mouseMoved (MouseEvent e) {
                 mouse[0] = e.getX();
                 mouse[1] = e.getY();
             }
-            public void mouseDragged (MouseEvent e) {
-               if (focus != null){
-                   focus.drag(e.getX(),e.getY());
-                   repaint(); //outer.repaint()
-                }
-            }
+            
         });
         this.addKeyListener (
             new KeyAdapter() {
