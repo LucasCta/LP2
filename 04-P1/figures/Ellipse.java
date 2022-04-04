@@ -8,10 +8,18 @@ public class Ellipse extends Figure{
         super(x,y,lineColor,bgColor);
         this.w = w;
         this.h = h;
-        this.container[0] = x;
-        this.container[1] = x+w;
-        this.container[2] = y;
-        this.container[3] = y+h;
+    }
+    public Ellipse copy () {
+        return new Ellipse(this.x, this.y, this.w, this.h, this.lineColor, this.bgColor);
+    }
+    public void sizeChange (int a, boolean b){
+        if (b) {this.w += a;}
+        else {this.h += a;}
+        if (this.w < 10){this.w = 10;}
+        if (this.h < 10){this.h = 10;}
+    } 
+    public boolean isInside (int x, int y) {
+        return false;
     }
     public void print () {
         System.out.format("Elipse de tamanho (%d,%d) na posicao (%d,%d).\n",

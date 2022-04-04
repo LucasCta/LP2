@@ -34,12 +34,6 @@ class ArrFigures extends JFrame {
                 }
             }
         );        
-        this.addMouseMotionListener(new MouseAdapter() {
-            public void mouseMoved (MouseEvent e) {
-                mouse[0] = e.getX();
-                mouse[1] = e.getY();
-            }
-        });
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed (MouseEvent e) {
                 if (focus != null){
@@ -47,13 +41,14 @@ class ArrFigures extends JFrame {
                     highlight= null;
                 }
                 for (Figure fig: figuresList) {
-                    if (e.getX() > fig.container[0] && e.getX() < fig.container[1] 
-                        &&  e.getY() > fig.container[2] && e.getY() < fig.container[3]){
-                        highlight = new Rect(fig.container[0],fig.container[2],
-                            fig.container[1]-fig.container[0],fig.container[3]-fig.container[2],
-                            Color.pink,null); 
-                        focus = fig;
-                    }
+                    //if (fig.isInside(e.getX(),e.getY())){
+                    focus = fig;
+                    highlight = fig.copy();
+                    highlight.bgColor = null;
+                    highlight.lineColor = Color.red;
+                    highlight.sizeChange(1,true);
+                    highlight.sizeChange(1,false); 
+                    //}
                 }
                 if (focus != null) {
                     figuresList.add(focus);
@@ -61,6 +56,19 @@ class ArrFigures extends JFrame {
                     focus = figuresList.get(figuresList.size()-1); 
                 }
                 repaint(); //outer.repaint()
+            }
+        });
+        this.addMouseMotionListener(new MouseAdapter() {
+            public void mouseMoved (MouseEvent e) {
+                mouse[0] = e.getX();
+                mouse[1] = e.getY();
+            }
+            public void mouseDragged (MouseEvent e) {
+               if (focus != null){
+                   focus.drag(e.getX(),e.getY());
+                   highlight.drag(e.getX(),e.getY());
+                   repaint(); //outer.repaint()
+                }
             }
         });
         this.addKeyListener (
@@ -84,28 +92,31 @@ class ArrFigures extends JFrame {
                     if (evt.getKeyChar() == 't'){
                         figuresList.add(new Triangle(x,y,w,h, colorList.get(c1), colorList.get(c2)));
                     }
-                    if (evt.getKeyChar() == 'l'){
-                        int x2 = x + rand.nextInt(100) - 50;
-                        int y2 = y + rand.nextInt(100) - 50;
-                        figuresList.add(new Line(x,y,x2,y2, colorList.get(c1)));
-                    }
                     if (evt.getKeyChar() == 'x' && focus != null){
                         figuresList.remove(focus);
                         focus = null;
                         highlight = null;
                     }
+                    if (evt.getKeyChar() == '+' && focus != null){
+                        boolean b = false;
+                        if(evt.isControlDown()){b = true;}
+                        focus.sizeChange(1,b); 
+                        highlight.sizeChange(1,b); 
+                    }
+                    if (evt.getKeyChar() == '-' && focus != null){
+                        boolean b = false;
+                        if(evt.isControlDown()){b = true;}
+                        focus.sizeChange(-1,b); 
+                        highlight.sizeChange(-1,b); 
+                    }
                     for (int i = 0; i < 6; i++){
                         char c[] = {'1','2','3','4','5','6'};
                         if (evt.getKeyChar() == c[i] && focus != null){
-                            for (Figure fig: figuresList){
-                                if (fig == focus){
-                                    if(evt.isControlDown()){
-                                        fig.lineColor = colorList.get(i);
-                                    }
-                                    else{
-                                        fig.bgColor = colorList.get(i);
-                                    }
-                                } 
+                            if(evt.isControlDown()){
+                                focus.lineColor = colorList.get(i);
+                            }
+                            else{
+                                focus.bgColor = colorList.get(i);
                             }
                         }
                     }

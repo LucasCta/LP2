@@ -5,24 +5,33 @@ public class Triangle extends Figure{
     private int r, rot;
     private int vx[] = {1,1,1};
     private int vy[] = {1,1,1};
+    private void setVertices(){
+      for (int i = 0; i < 3; i++){
+        this.vx[i] = (int)(this.r*Math.cos(Math.toRadians(this.rot+i*120))) + this.x;
+        this.vy[i] = (int)(this.r*Math.sin(Math.toRadians(this.rot+i*120))) + this.y;
+      }      
+    }
     public Triangle (int x, int y, int r, int rot, Color lineColor, Color bgColor) {
       super(x,y,lineColor,bgColor);
       this.r = r;
       this.rot = rot;
-      for (int i = 0; i < 3; i++){
-        this.vx[i] = (int)(vx[i]*r*Math.cos(Math.toRadians(rot+i*120))) + x;
-        this.vy[i] = (int)(vy[i]*r*Math.sin(Math.toRadians(rot+i*120))) + y;
-      }      
-      this.container[0] = vx[0];
-      this.container[1] = vx[0];
-      this.container[2] = vy[0];
-      this.container[3] = vy[0];    
-      for (int i = 1; i < 3; i++){
-        if (this.vx[i] < this.container[0]){this.container[0]=this.vx[i];}
-        if (this.vx[i] > this.container[1]){this.container[1]=this.vx[i];}
-        if (this.vy[i] < this.container[2]){this.container[2]=this.vy[i];}
-        if (this.vy[i] > this.container[3]){this.container[3]=this.vy[i];}
-      }
+      setVertices();
+    }
+    public Triangle copy () {
+      return new Triangle(this.x, this.y, this.r, this.rot, this.lineColor, this.bgColor);
+    }
+    public void drag (int x, int y){
+      this.x = x;
+      this.y = y;
+      setVertices();
+  };
+    public void sizeChange (int a, boolean b){
+        this.r += a;
+        if (this.r < 10){this.r = 10;}
+        setVertices();
+    } 
+    public boolean isInside (int x, int y) {
+        return false;
     }
     public void print () {
       System.out.format("Triangle at (%d,%d), Radius %d, Rotation %d, with Vertices: ",

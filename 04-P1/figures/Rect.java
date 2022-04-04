@@ -3,16 +3,22 @@ import java.awt.*;
 
 public class Rect extends Figure{
     private int w, h;
-    public int area () {return w*h;}
-    public void drag (int dx, int dy) {this.x += dx;this.y += dy;}
     public Rect (int x, int y, int w, int h, Color lineColor, Color bgColor) {
         super(x,y,lineColor,bgColor);
         this.w = w;
         this.h = h;
-        this.container[0] = x-2;
-        this.container[1] = x+w+2;
-        this.container[2] = y-2;
-        this.container[3] = y+h+2;
+    }
+    public Rect copy () {
+        return new Rect(this.x, this.y, this.w, this.h, this.lineColor, this.bgColor);
+    }
+    public void sizeChange (int a, boolean b){
+        if (b) {this.w += a;}
+        else {this.h += a;}
+        if (this.w < 10){this.w = 10;}
+        if (this.h < 10){this.h = 10;}
+    } 
+    public boolean isInside (int x, int y) {
+        return false;
     }
     public void print () {
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
