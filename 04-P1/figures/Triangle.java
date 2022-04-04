@@ -28,7 +28,23 @@ public class Triangle extends Figure{
         setVertices();
     } 
     public boolean isInside (int x, int y) {
-        return false;
+      double pArea = 0;
+      double tArea = triangleArea(vx,vy);
+      int xv[] = {x, 0, 0};
+      int yv[] = {y, 0, 0};
+      for (int i = 0; i < 2; i ++){
+        xv[1] = vx[i];
+        yv[1] = vy[i];
+        xv[2] = vx[i+1];
+        yv[2] = vy[i+1];
+        pArea += triangleArea(xv,yv);
+      }  
+      xv[1] = vx[2];
+      xv[2] = vx[0];
+      yv[1] = vy[2];
+      yv[2] = vy[0];
+      pArea += triangleArea(xv,yv);
+      return tArea == pArea;
     }
     public void print () {
       System.out.format("Triangle at (%d,%d), Radius %d, Rotation %d, with Vertices: ",

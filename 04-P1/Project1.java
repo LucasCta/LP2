@@ -40,13 +40,13 @@ class ArrFigures extends JFrame {
                     focus = null;
                 }
                 for (Figure fig: figuresList) {
-                    //if (fig.isInside(e.getX(),e.getY())){
+                    if (fig.isInside(e.getX(),e.getY())){
                         if (focus != null){
                             focus.highlight = false;
                         }
                         focus = fig;
                         focus.highlight = true;
-                    //}
+                    }
                 }
                 if (focus != null) {
                     figuresList.add(focus);

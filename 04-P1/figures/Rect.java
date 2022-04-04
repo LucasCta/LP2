@@ -15,7 +15,21 @@ public class Rect extends Figure{
         if (this.h < 10){this.h = 10;}
     } 
     public boolean isInside (int x, int y) {
-        return false;
+        double pArea = 0;
+        double rArea = w * h;
+        int vx[] = {x, this.x, this.x + this.w};
+        int vy[] = {y, this.y, this.y};
+        pArea += triangleArea(vx,vy);
+        vx[1] = this.x + this.w;
+        vy[2] = this.y + this.h;
+        pArea += triangleArea(vx,vy);
+        vx[2] = this.x;
+        vy[1] = this.y + this.h;
+        pArea += triangleArea(vx,vy);
+        vx[1] = this.x;
+        vy[2] = this.y;
+        pArea += triangleArea(vx,vy);
+        return rArea == pArea;
     }
     public void print () {
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",

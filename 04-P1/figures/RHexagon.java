@@ -28,7 +28,28 @@ public class RHexagon extends Figure{
         setVertices();
     } 
     public boolean isInside (int x, int y) {
-        return false;
+        double pArea[] = {0,0};
+        int xv[] = {x, 0, 0};
+        int yv[] = {y, 0, 0};
+        for (int j = 0; j < 2; j++){
+          if (j == 1){
+            xv[0] = this.x;
+            yv[0] = this.y;
+          }
+          for (int i = 0; i < 5; i ++){
+            xv[1] = vx[i];
+            yv[1] = vy[i];
+            xv[2] = vx[i+1];
+            yv[2] = vy[i+1];
+            pArea[j] += triangleArea(xv,yv);
+          }  
+          xv[1] = vx[5];
+          xv[2] = vx[0];
+          yv[1] = vy[5];
+          yv[2] = vy[0];
+          pArea[j] += triangleArea(xv,yv);
+        }
+        return pArea[0] == pArea[1];
     }
     public void print () {
       System.out.format("Hexagon at (%d,%d), Radius %d, Rotation %d, with Vertices: ",
