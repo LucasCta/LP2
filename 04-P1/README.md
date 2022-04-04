@@ -17,5 +17,5 @@
   6. 1-6 = Mudar Cor de Fundo
   7. ctrl 1-6 = Mudar Cor de Borda
 
-##### Obs: Clicar em uma figura a trará para frente de todas as outras. /n Arraste a figura selecionada para movê-la pela tela.
+##### Obs: Clicar em uma figura a trará para frente de todas as outras. Arraste a figura selecionada para movê-la pela tela.
    
