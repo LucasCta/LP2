@@ -63,7 +63,7 @@ class ArrFigures extends JFrame {
                         focus.sizeChange(e.getX()-mouse[0],true);
                         focus.sizeChange(e.getY()-mouse[1],false);
                     }
-                    else focus.drag(e.getX(),e.getY()); 
+                    else focus.drag(focus.x+e.getX()-mouse[0],focus.y+e.getY()-mouse[1]); 
                     mouse[0] = e.getX();
                     mouse[1] = e.getY();
                     repaint(); //outer.repaint()
