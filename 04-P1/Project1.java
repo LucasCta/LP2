@@ -13,8 +13,9 @@ class Project1 {
 }
 
 class ArrFigures extends JFrame {
-    Figure focus = null;
     int mouse[] = {0,0};
+    Figure focus = null;
+    Random rand = new Random();
     ArrayList<Figure> figuresList= new ArrayList<Figure>();
     ArrayList<Color> colorList = new ArrayList<Color>(){{
         add(Color.blue);
@@ -24,7 +25,6 @@ class ArrFigures extends JFrame {
         add(Color.white);
         add(Color.black);
     }};
-    Random rand = new Random();
     ArrFigures () {
         this.addWindowListener (
             new WindowAdapter() {
@@ -96,24 +96,46 @@ class ArrFigures extends JFrame {
                     if (evt.getKeyChar() == 't'){
                         figuresList.add(new Triangle(x,y,w,h, colorList.get(c1), colorList.get(c2)));
                     }
+                    if (evt.getKeyChar() ==  KeyEvent.VK_TAB){
+                        if (figuresList.size() != 0){
+                            if (focus == null){
+                                focus = figuresList.get(figuresList.size()-1); 
+                                focus.highlight = true;
+                            }
+                            else{
+                                int i = figuresList.indexOf(focus);
+                                focus.highlight = false;
+                                if (i > 0) focus = figuresList.get(i-1);
+                                else focus = figuresList.get(figuresList.size()-1);
+                                focus.highlight = true;
+                            }
+                        }
+                    }
+                    if (evt.getKeyChar() == 'f'){
+                        if (focus != null) {
+                            figuresList.add(focus);
+                            figuresList.remove(focus);
+                            focus = figuresList.get(figuresList.size()-1); 
+                        }
+                    }
                     if (evt.getKeyChar() == 'x' && focus != null){
                         figuresList.remove(focus);
                         focus = null;
                     }
                     if (evt.getKeyChar() == '+' && focus != null){
                         boolean b = false;
-                        if(evt.isControlDown()){b = true;}
+                        if (evt.isControlDown()) b = true;
                         focus.sizeChange(1,b); 
                     }
                     if (evt.getKeyChar() == '-' && focus != null){
                         boolean b = false;
-                        if(evt.isControlDown()){b = true;}
+                        if (evt.isControlDown()) b = true;
                         focus.sizeChange(-1,b); 
                     }
                     for (int i = 0; i < 6; i++){
                         char c[] = {'1','2','3','4','5','6'};
                         if (evt.getKeyChar() == c[i] && focus != null){
-                            if(evt.isControlDown()){
+                            if (evt.isControlDown()){
                                 focus.lineColor = colorList.get(i);
                             }
                             else{
@@ -127,6 +149,7 @@ class ArrFigures extends JFrame {
         );
         this.setTitle("Java Packages");
         this.setSize(350, 350);
+        this.setFocusTraversalKeysEnabled(false);
     }
     public void paint (Graphics g) {
         super.paint(g);

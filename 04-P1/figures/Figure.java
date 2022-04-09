@@ -11,7 +11,7 @@ public abstract class Figure implements Cloneable {
     public void drag (int x, int y){
         this.x = x;
         this.y = y;
-    };
+    }
     public Figure (int x, int y, Color lineColor, Color bgColor){
         this.x = x;
         this.y = y;

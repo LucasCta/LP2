@@ -21,7 +21,7 @@ public class Triangle extends Figure{
       this.x = x;
       this.y = y;
       setVertices();
-  };
+    }
     public void sizeChange (int a, boolean b){
         this.r += a;
         if (this.r < 10){this.r = 10;}
