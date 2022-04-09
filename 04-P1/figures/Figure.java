@@ -1,7 +1,7 @@
 package figures;
 import java.awt.*;
 
-public abstract class Figure implements Cloneable {
+public abstract class Figure{
     public int x, y;
     public boolean highlight = false;
     public Color lineColor, bgColor;
