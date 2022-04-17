@@ -40,7 +40,7 @@ class ArrFigures extends JFrame {
                     focus = null;
                 }
                 for (Figure fig: figuresList) {
-                    if (fig.isInside(e.getX(),e.getY())){
+                    if (fig.clicked(e.getX(),e.getY())){
                         if (focus != null){
                             focus.highlight = false;
                         }

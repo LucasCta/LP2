@@ -15,7 +15,7 @@ public class Ellipse extends Figure{
         if (this.w < 10){this.w = 10;}
         if (this.h < 10){this.h = 10;}
     } 
-    public boolean isInside (int x, int y) {
+    public boolean clicked (int x, int y) {
         double eCenter[] = {(this.x*2+this.w)/2,((this.y*2)+this.h)/2};
         double a = Math.pow(x - eCenter[0],2)/Math.pow(this.w/2,2);
         double b = Math.pow(y - eCenter[1],2)/Math.pow(this.h/2,2);

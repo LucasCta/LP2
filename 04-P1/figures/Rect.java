@@ -14,7 +14,7 @@ public class Rect extends Figure{
         if (this.w < 10){this.w = 10;}
         if (this.h < 10){this.h = 10;}
     } 
-    public boolean isInside (int x, int y) {
+    public boolean clicked (int x, int y) {
         double pArea = 0;
         double rArea = w * h;
         int vx[] = {x, this.x, this.x + this.w};

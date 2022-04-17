@@ -27,7 +27,7 @@ public class RHexagon extends Figure{
         if (this.r < 10){this.r = 10;}
         setVertices();
     } 
-    public boolean isInside (int x, int y) {
+    public boolean clicked (int x, int y) {
         double pArea[] = {0,0};
         int xv[] = {x, 0, 0};
         int yv[] = {y, 0, 0};

@@ -27,7 +27,7 @@ public class Triangle extends Figure{
         if (this.r < 10){this.r = 10;}
         setVertices();
     } 
-    public boolean isInside (int x, int y) {
+    public boolean clicked (int x, int y) {
       double pArea = 0;
       double tArea = triangleArea(vx,vy);
       int xv[] = {x, 0, 0};
