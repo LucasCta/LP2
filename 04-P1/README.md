@@ -10,9 +10,8 @@
   4. h = Hexágono
 
 - Selecionar Figuras
-  1. RMB = Seleciona e move para frente 
-  2. TAB = Seleciona a próxima figura
-  3. f = Move a figura para frente
+  1. RMB = Seleciona a figura clicada move para frente 
+  2. TAB = Seleciona a figura mais atrás e move para frente
   4. x = Remove a figura selecionada
 
 - Com a Figura Selecionada

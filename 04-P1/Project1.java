@@ -98,21 +98,9 @@ class ArrFigures extends JFrame {
                     }
                     if (evt.getKeyChar() ==  KeyEvent.VK_TAB){
                         if (figuresList.size() != 0){
-                            if (focus == null){
-                                focus = figuresList.get(figuresList.size()-1); 
-                                focus.highlight = true;
-                            }
-                            else{
-                                int i = figuresList.indexOf(focus);
-                                focus.highlight = false;
-                                if (i > 0) focus = figuresList.get(i-1);
-                                else focus = figuresList.get(figuresList.size()-1);
-                                focus.highlight = true;
-                            }
-                        }
-                    }
-                    if (evt.getKeyChar() == 'f'){
-                        if (focus != null) {
+                            if (focus != null) focus.highlight = false;
+                            focus = figuresList.get(0); 
+                            focus.highlight = true;
                             figuresList.add(focus);
                             figuresList.remove(focus);
                             focus = figuresList.get(figuresList.size()-1); 
