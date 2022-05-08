@@ -13,11 +13,11 @@ class Project1 {
 }
 
 class ArrFigures extends JFrame {
-    int mouse[] = {0,0};
-    Figure focus = null;
-    Random rand = new Random();
-    ArrayList<Figure> figuresList= new ArrayList<Figure>();
-    ArrayList<Color> colorList = new ArrayList<Color>(){{
+    private int mouse[] = {0,0};
+    private Figure focus = null;
+    private Random rand = new Random();
+    private ArrayList<Figure> figuresList= new ArrayList<Figure>();
+    private ArrayList<Color> colorList = new ArrayList<Color>(){{
         add(Color.blue);
         add(Color.red);
         add(Color.yellow);

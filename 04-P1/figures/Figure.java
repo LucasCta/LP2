@@ -11,13 +11,13 @@ public abstract class Figure implements IVisible{
         this.x = x;
         this.y = y;
     }
-    public Figure (int x, int y, Color lineColor, Color bgColor){
+    protected Figure (int x, int y, Color lineColor, Color bgColor){
         this.x = x;
         this.y = y;
         this.lineColor = lineColor;
         this.bgColor = bgColor;
     }
-    public double triangleArea (int vx[], int vy[]){
+    protected double triangleArea (int vx[], int vy[]){
         double a = vx[0]*(vy[1] - vy[2]);
         double b = vx[1]*(vy[2] - vy[0]);
         double c = vx[2]*(vy[0] - vy[1]);
