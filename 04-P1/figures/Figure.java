@@ -1,8 +1,9 @@
 package figures;
 import java.awt.*;
 import ivisible.IVisible;
+import java.io.Serializable;
 
-public abstract class Figure implements IVisible{
+public abstract class Figure implements IVisible, Serializable {
     public int x, y;
     public boolean highlight = false;
     public Color lineColor, bgColor;
