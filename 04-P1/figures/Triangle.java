@@ -18,8 +18,8 @@ public class Triangle extends Figure{
       setVertices();
     }
     public void drag (int x, int y){
-      this.x = x;
-      this.y = y;
+      this.x += x;
+      this.y += y;
       setVertices();
     }
     public void sizeChange (int a, boolean b){

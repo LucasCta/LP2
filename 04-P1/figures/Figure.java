@@ -4,13 +4,13 @@ import ivisible.IVisible;
 import java.io.Serializable;
 
 public abstract class Figure implements IVisible, Serializable {
-    public int x, y;
+    protected int x, y;
     public boolean highlight = false;
     public Color lineColor, bgColor;
     public abstract void sizeChange (int a, boolean b);
     public void drag (int x, int y){
-        this.x = x;
-        this.y = y;
+        this.x += x;
+        this.y += y;
     }
     protected Figure (int x, int y, Color lineColor, Color bgColor){
         this.x = x;
