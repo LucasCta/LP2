@@ -3,18 +3,12 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import figures.*;
 
 class Project1 {
     public static void main (String[] args) {
         ArrFigures frame = new ArrFigures();
-        frame.loadFigures();
         frame.setVisible(true);
     }
 }
@@ -25,19 +19,7 @@ class ArrFigures extends JFrame {
     private Random rand = new Random();
     private ArrayList<Figure> figuresList = new ArrayList<Figure>();
     public void loadFigures(){
-        try {
-            FileInputStream fis = new FileInputStream("proj.bin");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            ArrayList<Figure> temp = (ArrayList<Figure>) ois.readObject();
-            if (temp != null) figuresList = temp;
-            ois.close();
-        } catch(FileNotFoundException exception) {
-            exception.printStackTrace();
-        } catch(IOException exception) {
-            exception.printStackTrace();
-        } catch(ClassNotFoundException exception){
-            exception.printStackTrace(); 
-        }
+        
     };
     private ArrayList<Color> colorList = new ArrayList<Color>(){{
         add(Color.blue);
@@ -48,6 +30,14 @@ class ArrFigures extends JFrame {
         add(Color.black);
     }};
     ArrFigures () {
+        try {
+            FileInputStream fis = new FileInputStream("proj.bin");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            this.figuresList = (ArrayList<Figure>) ois.readObject();
+            ois.close();
+        } catch(Exception x) {
+            System.out.println("Erro ao carregar figuras.");
+        } 
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
@@ -55,11 +45,10 @@ class ArrFigures extends JFrame {
                         FileOutputStream fos = new FileOutputStream("proj.bin");
                         ObjectOutputStream oos = new ObjectOutputStream(fos);
                         oos.writeObject(figuresList);
+                        oos.flush();
                         oos.close();
-                    } catch(FileNotFoundException exception) {
-                        exception.printStackTrace();
-                    } catch(IOException exception) {
-                        exception.printStackTrace();
+                    } catch(Exception x) {
+                        System.out.println("Erro ao salvar figuras.");
                     }
                     System.exit(0);
                 }
