@@ -36,7 +36,7 @@ public class Rect extends Figure{
             this.w, this.h, this.x, this.y);
         System.out.format("Background Color: %s, Line Color: %s",this.bgColor,this.lineColor);
     }
-    public void paint (Graphics g) {
+    public void paint (Graphics g, boolean focus) {
         Graphics2D g2d = (Graphics2D) g;
         if (this.bgColor != null){
             g2d.setColor(this.bgColor);
@@ -44,7 +44,7 @@ public class Rect extends Figure{
         }
         g2d.setColor(this.lineColor);
         g2d.drawRect(this.x,this.y, this.w,this.h);
-        if (this.highlight == true){
+        if (focus){
             g2d.setColor(Color.red);
             g2d.drawRect(this.x-3,this.y-3,this.w+6,this.h+6);
         }

@@ -67,17 +67,10 @@ class ArrFigures extends JFrame {
         );        
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed (MouseEvent e) {
-                if (focus != null){
-                    focus.highlight = false;
-                    focus = null;
-                }
+                if (focus != null) focus = null;
                 for (Figure fig: figuresList) {
                     if (fig.clicked(e.getX(),e.getY())){
-                        if (focus != null){
-                            focus.highlight = false;
-                        }
                         focus = fig;
-                        focus.highlight = true;
                     }
                 }
                 if (focus != null) {
@@ -130,9 +123,7 @@ class ArrFigures extends JFrame {
                     }
                     if (evt.getKeyChar() ==  KeyEvent.VK_TAB){
                         if (figuresList.size() != 0){
-                            if (focus != null) focus.highlight = false;
                             focus = figuresList.get(0); 
-                            focus.highlight = true;
                             figuresList.add(focus);
                             figuresList.remove(focus);
                             focus = figuresList.get(figuresList.size()-1); 
@@ -174,7 +165,7 @@ class ArrFigures extends JFrame {
     public void paint (Graphics g) {
         super.paint(g);
         for (Figure fig: this.figuresList) {
-            fig.paint(g);
+            fig.paint(g, focus == fig);
         }
     }
 }

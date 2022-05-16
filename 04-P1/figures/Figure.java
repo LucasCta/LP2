@@ -5,7 +5,6 @@ import java.io.Serializable;
 
 public abstract class Figure implements IVisible, Serializable {
     protected int x, y;
-    public boolean highlight = false;
     public Color lineColor, bgColor;
     public abstract void sizeChange (int a, boolean b);
     public void drag (int x, int y){

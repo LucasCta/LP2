@@ -59,7 +59,7 @@ public class RHexagon extends Figure{
       }
       System.out.format("\nBackground Color: %s, Line Color: %s",this.bgColor,this.lineColor);
     }
-    public void paint (Graphics g) {
+    public void paint (Graphics g, boolean focus) {
         Graphics2D g2d = (Graphics2D) g;
         if (this.bgColor != null){
           g2d.setColor(this.bgColor);
@@ -67,7 +67,7 @@ public class RHexagon extends Figure{
         }
         g2d.setColor(this.lineColor);
         g2d.drawPolygon(new Polygon(vx, vy, 6));
-        if (this.highlight == true){
+        if (focus){
           g2d.setColor(Color.red);
           this.r += 4;
           setVertices();
