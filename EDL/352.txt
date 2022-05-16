@@ -1,0 +1,50 @@
+Tipagem Paramétrica de Haskell vs "Duck Typing" de Python.
+
+Critérios Externos:
+
+Desenvolvimento Rápido: As duas funcionalidades são de relativamente simples implementação, nesse quesito, a diferença é irrelevante.
+Fácil Manutenção: A manutenção de um programa que usa o duck typing de Python pode ser mais difícil, pois a tipagem paramétrica de haskell consegue facilmente criar controles dos tipos e usá-los nas definições de funções, mesmo os abstratos e genéricos, o que diminui o escopo de vulnerabilidades/erros possíveis para serem identificadas e corrigidas.
+Confiabilidade e Segurança: Como dito na parte de fácil manutenção, esse controle extra que a tipagem paramétrica possui faz com que os tipos e os retornos mais vezes sejam os esperados, tornando a técnica mais segura.
+Portabilidade: Acredito que não se aplica quando falamos de uma funcionalidade nativa da linguagem.
+Eficiência:  As duas são muito eficientes. Haskell pode ser considerado mais eficiente por ter o tipo já conhecido em tempo de compilação. Por outro lado, Python nem se importa em perguntar o tipo, apenas chama a função para o objeto (retornando um erro caso ele não a possua), o que também o torna eficiente.
+Valor Pedagógico / Tempo de Treinamento: As duas apresentam um grande valor pedagógico, entretanto, acredito que devem ser ensinadas a níveis diferentes de um estudante. O Duck Typing de Python é bem intuitivo para quem está começando com programação ou para alguém inexperiente com a linguagem, e fornece um bom paralelo com linguagem orientada a objeto. Já haskell requer um melhor entendimento de tipos e funções para uma boa implementação, e por isso leva um pouco mais de tempo, mas justamente por isso também é imprescindível na formação de um aluno/profissional.
+Reusabilidade: Ambos são extremamente reutilizáveis, apenas, como já dito, com python tendo que tomar um pouco mais de cuidado nos tipos usados.
+
+Critérios Internos:
+
+Legibilidade: Haskell permite uma fácil visualização, pela própria definição dos tipos, do que é esperado que a função faça, ganhando de python nesse quesito.
+Simples de escrever: Neste caso, Python ganha, pois não precisamos definir nada. Entretanto, não é como se em Haskell fosse difícil de escrever, na verdade, é também extremamente simples, é apenas que com Python você basicamente não precisa escrever para usar a funcionalidade.
+Simplicidade da funcionalidade: Em ambos os casos a funcionalidade faz exatamente o que promete.
+Ortogonalidade: Acredito que Haskell ganha nessa pelo uso dos tipos nas definições de funções.
+Consistência: Pela definição de tipos, acredito que Haskell retorna mais consistentemente os tipos esperados.
+Expressividade: Ambas as funcionalidades são muito expressivas.
+Abstração: A funcionalidade de haskell permite tipos abstratos em definições, o que é o ápice da abstração. Entretanto, Python aceita funções com qualquer tipo, o que também pode ser considerado uma grande abstração. 
+Tempo de Amarração: Haskell tem a vantagem por saber os tipos em tempo de compilação. Entretanto, como já discutido na eficiência em critérios internos, o duck typing nem irá necessitar do tipo até que seja chamada uma função para o objeto.
+
+Exemplo (Definição de Árvore Binária e Função Folhas):
+
+Haskell:
+
+data Arvore a = Galho a (Arvore a) (Arvore a) | Vazio
+
+folhas :: (Arvore a) -> Int
+folhas Vazio = 0
+folhas (Galho _ e d)
+    |somaF == 0 = 1 + somaF
+    |somaF > 0 = 0 + somaF
+    where somaF = (folhas e) + (folhas d)
+
+
+Python: 
+
+def folhas(a):
+    if a.e + a.v == 0:
+        return 1
+    return a.e + a.v
+
+class Arvore:
+    def __init__(self, v=None, e=None, d=None):
+        self.v = v
+        self.e = e
+        self.d = d
+
