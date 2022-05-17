@@ -1,6 +1,6 @@
 Inferência de Tipos de Haskell vs Tipagem Dinâmica de Python
 
-As duas funcionalidades se baseiam na identificação/definição do tipo de variáveis sem que seja necessário definir quais são seus tipos..
+As duas funcionalidades se baseiam na capacidade de se inferir e definior o tipo de variáveis sem que seja necessário definir quais são seus tipos.
 
 Haskell Type Inference: Os tipos são definidos no tempo de compilação
 Python Dynamic Typing: Os tipos são definidos no tempo de execução.
