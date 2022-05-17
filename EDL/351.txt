@@ -2,8 +2,8 @@ Inferência de Tipos de Haskell vs Tipagem Dinâmica de Python
 
 As duas funcionalidades se baseiam na identificação/definição do tipo de variáveis sem que seja necessário definir quais são seus tipos..
 
-Haskell Type Inference: Os tipos são dados no tempo de compilação
-Python Dynamic Typing: Os tipos são dados em tempo de execução.
+Haskell Type Inference: Os tipos são definidos no tempo de compilação
+Python Dynamic Typing: Os tipos são definidos no tempo de execução.
 
 Critérios Externos:
 
@@ -55,3 +55,10 @@ valor /= 2
 print(type(valor))
 
 -No código, demonstramos a determinação de tipos em runtime, com aluno mudando de tipo conforme as necessidades.
+
+Fontes:
+
+https://towardsdatascience.com/dynamic-typing-in-python-307f7c22b24e
+https://wiki.haskell.org/Type_inference
+https://www.youtube.com/watch?v=mwfYA0W8nTg&list=PLf6RUGZQ7tMxGau_f8mw4pGHMTcKOigSs
+https://stackoverflow.com/questions/26035893/the-nature-of-haskell-type-system-static-dynamic-manual-inferred#:~:text=Type%20inference%20is%20done%20at,a%20%22static%22%20type%20system.
