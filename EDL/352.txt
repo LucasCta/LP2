@@ -57,7 +57,6 @@ class Arvore:
 
 Fontes:
 
-https://towardsdatascience.com/duck-typing-python-7aeac97e11f8
 https://www.devmedia.com.br/duck-typing-com-python/40223
 https://livebook.manning.com/book/get-programming-with-haskell/chapter-18/10
 https://www.youtube.com/watch?v=PkiyHHoRx1c&list=PLf6RUGZQ7tMyxi4Mky7H8LBfeW2qah535&index=5
