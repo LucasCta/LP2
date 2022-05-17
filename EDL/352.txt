@@ -1,5 +1,11 @@
 Tipagem Paramétrica de Haskell vs "Duck Typing" de Python.
 
+Definições:
+
+Tipagem Paramétrica: Funcionalidade que permite que se definam tipos usando parâmetros, permitindo que o programador defina  estruturas de dados genéricas/parcialmente genéricas. Essa funcionalidade também pode ser aplicada para funções, também definindo os tipos de entrada e saída com parâmetros, estes pondendo ser genéricos.
+
+Duck Typing: Funcionalidade que permite que uma função seja chamada para qualquer objeto, e deve funcionar corretamente desde que o objeto tenha uma implementação daquela função. Ou seja, o tipo não importa desde que haja uma implementação da função para esse tipo.
+
 Critérios Externos:
 
 Desenvolvimento Rápido: As duas funcionalidades são de relativamente simples implementação, nesse quesito, a diferença é irrelevante.
@@ -48,3 +54,11 @@ class Arvore:
         self.e = e
         self.d = d
 
+
+Fontes:
+
+https://towardsdatascience.com/duck-typing-python-7aeac97e11f8
+https://www.devmedia.com.br/duck-typing-com-python/40223
+https://livebook.manning.com/book/get-programming-with-haskell/chapter-18/10
+https://www.youtube.com/watch?v=PkiyHHoRx1c&list=PLf6RUGZQ7tMyxi4Mky7H8LBfeW2qah535&index=5
+https://www.youtube.com/watch?v=a0jdpAQkc_c&list=PLf6RUGZQ7tMz-oDaZqycaLhIMhw6594_5
