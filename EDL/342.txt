@@ -1,0 +1,24 @@
+import Data.Hashable
+import System.Random
+import System.IO.Unsafe
+
+unsecureDatabase :: [DbItem]
+unsecureDatabase = [("Albert"         ,"amg3115"       ),
+                    ("UsuarioAnonimo" ,"senha312"      ),
+                    ("Josefa"         ,"125va2s"       ),
+                    ("Junior"         ,"senha123"      ),
+                    ("Beringer"       ,"1233241"       ),
+                    ("Anabela"        ,"lj918"         ),
+                    ("Ferdinandson"   ,"senhaSecreta"  )]
+
+type DbItem = (String, String)
+user :: DbItem -> String
+user (l,_) = l
+password :: DbItem -> String
+password (_,m) = m
+
+newDatabase = foldr (\dbi nD -> (user dbi, take 20 $ randomRs ('a','z') $ unsafePerformIO newStdGen, password dbi) : nD) [] unsecureDatabase
+newDatabaseHashed = map (\(user, salt, password) -> (user, salt, hashWithSalt (hash salt) password)) newDatabase
+login l = filter (\(u,s,h) -> hashWithSalt (hash s) (password l) == h) newDatabaseHashed
+
+main = print(login ("Junior","senha123"))
