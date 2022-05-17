@@ -19,6 +19,6 @@ password (_,m) = m
 
 newDatabase = foldr (\dbi nD -> (user dbi, hash(take 20 $ randomRs ('a','z') $ unsafePerformIO newStdGen), password dbi) : nD) [] unsecureDatabase
 newDatabaseHashed = map (\(user, salt, password) -> (user, salt, hashWithSalt salt password)) newDatabase
-login l = filter (\(u,s,h) -> hashWithSalt s (password l) == h) newDatabaseHashed
+login l = filter (\(_,s,h) -> hashWithSalt s (password l) == h) (filter (\(u,_,_) -> u == user l) newDatabaseHashed)
 
 main = print(login ("Junior","senha123"))
