@@ -17,8 +17,8 @@ user (l,_) = l
 password :: DbItem -> String
 password (_,m) = m
 
-newDatabase = foldr (\dbi nD -> (user dbi, take 20 $ randomRs ('a','z') $ unsafePerformIO newStdGen, password dbi) : nD) [] unsecureDatabase
-newDatabaseHashed = map (\(user, salt, password) -> (user, salt, hashWithSalt (hash salt) password)) newDatabase
-login l = filter (\(u,s,h) -> hashWithSalt (hash s) (password l) == h) newDatabaseHashed
+newDatabase = foldr (\dbi nD -> (user dbi, hash(take 20 $ randomRs ('a','z') $ unsafePerformIO newStdGen), password dbi) : nD) [] unsecureDatabase
+newDatabaseHashed = map (\(user, salt, password) -> (user, salt, hashWithSalt salt password)) newDatabase
+login l = filter (\(u,s,h) -> hashWithSalt s (password l) == h) newDatabaseHashed
 
 main = print(login ("Junior","senha123"))
