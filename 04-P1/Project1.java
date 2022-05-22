@@ -38,10 +38,16 @@ class ArrFigures extends JFrame {
     private ArrayList<Button> butLnColors = new ArrayList<Button>(){{ for(int i = 0; i < 6; i++){
             add(new Button(i, new Rect(20+i*15,150,10,10, colorList.get(i), Color.darkGray)));
     }}};
+    private ArrayList<Button> secondaryMenu = new ArrayList<Button>(){{
+        add(new Button(0, new Rect(30,170,60,20,Color.darkGray,Color.lightGray)));
+        add(new Button(1, new Ellipse(40,175,10,10,Color.darkGray,Color.orange)));
+        add(new Button(2, new Ellipse(55,175,10,10,Color.darkGray,Color.red)));
+        add(new Button(2, new Ellipse(70,175,10,10,Color.darkGray,Color.green)));
+    }};
     private Figure menu_canvas = new Rect(0,0,120,170, Color.darkGray, Color.LIGHT_GRAY);
     private Button focus_butLn = this.butLnColors.get(0);
     private Button focus_butBg = this.butBgColors.get(0);
-    private Button focus_butFig = this.butFigs.get(0);
+    private Button focus_butFig;
     private void addFigure(int type, int a, int b, int c, int d, int e, int f){
         switch (type) {
             case 0: figuresList.add(new Rect(a-2,b-2,c+10,d+10, colorList.get(e), colorList.get(f))); break;
@@ -92,13 +98,29 @@ class ArrFigures extends JFrame {
                         focus_butBg = but;
                     }
                 }
-                if (menu_canvas.clicked(e.getX(),e.getY()) == false && focus_butFig != null){
+                if (menu_canvas.clicked(e.getX(),e.getY()) == false && focus_butFig != null
+                    && secondaryMenu.get(0).clicked(e.getX(),e.getY()) == false){
                     addFigure(focus_butFig.indice, mouse[0], mouse[1],
                                 rand.nextInt(30)+20,rand.nextInt(30)+20,
                                 focus_butLn.indice, focus_butBg.indice);
                     focus_butFig = null;
+                } else if (secondaryMenu.get(0).clicked(e.getX(),e.getY())){
+                    if (secondaryMenu.get(1).clicked(e.getX(),e.getY())){
+                        if (focus != null){
+                            figuresList.remove(focus); 
+                            focus = null;
+                        }
+                    }
+                    if (secondaryMenu.get(2).clicked(e.getX(),e.getY())){
+                        figuresList.clear();
+                        focus = null;
+                    }
+                    if (secondaryMenu.get(3).clicked(e.getX(),e.getY())){
+                        System.out.print("Salvando");
+                    }
+                } else { 
+                    if (focus != null) focus = null;
                 }
-                if (focus != null) focus = null;
                 for (Figure fig: figuresList) {
                     if (fig.clicked(e.getX(),e.getY())){
                         focus = fig;
@@ -196,6 +218,9 @@ class ArrFigures extends JFrame {
         super.paint(g);
         for (Figure fig: this.figuresList) {
             fig.paint(g, focus == fig);
+        }
+        for (Button but: this.secondaryMenu) {
+            but.paint(g, false);
         }
         menu_canvas.paint(g, false);
         for (Button but: this.butFigs) {
