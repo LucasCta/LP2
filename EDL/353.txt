@@ -1,0 +1,39 @@
+Haskell String vs C char*
+
+Questão 1: 
+
+Em Haskell, o tipo String é um [Char], que é uma lista encadeada de Char (caracteres unicode). 
+Dessa forma, cada caractere da string tem um ponteiro que leva para o próximo caractere. 
+Pode ser definida tanto por ['a','b','c'] ou "abc", e pode ser trabalhada da mesma forma que uma outra lista de outro tipo qualquer em Haskell, com todas suas vantagens e desvantagens.
+    
+Questão 2:
+
+2a) Suas vantagens são: Podemos usar as operações para listas nativas de haskell para o tipo String (já que é uma lista), com citado na questão 1. Podemos facilmente gerar listas por “valor : restoLista”. Diferente de C, podemos facilmente acessar o seu tamanho com a função length. Além disso, o tipo Char contém caracteres unicode, permitindo um uso mais amplo de caracteres do que, por exemplo, ASCII, comumente usado em C.
+
+2b)  O tipo char* de C acaba sendo muito mais eficiente. O char* é um ponteiro para um array de caracteres em C, sendo o tipo char de c um inteiro de 8 bits, com uma relação com uma tabela (a mais comum sendo a ASCII). O array ficará guardado em uma região fixa da memória, e o ponteiro precisa guardar apenas o início da string armazenada (há um caractere que indica o fim da string).
+Mas por que isso é mais eficiente que a string de haskell? Além do fato de ter que percorrer pelos ponteiros para ter a string inteira, por cada char ser alocado individualmente, a lista [Char] é muito mais pesada que em C. O tipo Char em haskell tem 32 bits, para guardar os caracteres unicode, além do tamanho do ponteiro. Portanto, para cada caractere, temos 32bits + (Tamanho Ponteiro)Bits, muito maior que os 8 bits por caractere em C. Dessa forma, além de gastar mais espaço de armazenamento, operações como escrita e leitura de arquivos usando Strings, ou grandes operações com loops e etc serão muito complexas de serem otimizadas pelo compilador, com grande prejuízo na velocidade. Por isso, é comum que se usem tipos como o ByteString para esses tipos de operações, um tipo que usa apenas 8 bits por caracter e os armazena em linha contínua, bem mais equivalente ao char* de C.
+
+Fontes:
+
+https://hackage.haskell.org/package/base-4.16.1.0/docs/Data-String.html
+
+https://mmhaskell.com/blog/2017/5/15/untangling-haskells-strings#:~:text=The%20String%20type%20is%20the,to%20the%20basic%20String%20type.
+
+http://wiki.foz.ifpr.edu.br/wiki/index.php/Caracteres_e_String_em_C
+
+https://www.tutorialspoint.com/cprogramming/c_data_types.htm
+
+https://www.tutorialspoint.com/difference-between-char-s-and-char-s-in-c#:~:text=The%20s%5B%5D%20is%20an,are%2020%20bytes%20of%20data.
+
+https://stackoverflow.com/questions/576213/efficient-string-implementation-in-haskell
+
+https://www.youtube.com/watch?v=yvmut3R30CQ&list=PLf6RUGZQ7tMxGau_f8mw4pGHMTcKOigSs&index=5
+
+https://stackoverflow.com/questions/6823249/what-is-a-char
+
+http://book.realworldhaskell.org/read/efficient-file-processing-regular-expressions-and-file-name-matching.html
+
+https://wiki.haskell.org/Dealing_with_binary_data#:~:text=Normal%20Haskell%20String%20types%20are%20linked%20lists%20of%2032%2Dbit%20characters.
+
+https://iq.opengenus.org/character-in-c/#:~:text=C%20uses%20char%20type%20to,127%20or%200%20to%20255.
+

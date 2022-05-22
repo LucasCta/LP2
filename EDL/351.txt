@@ -1,0 +1,64 @@
+Inferência de Tipos de Haskell vs Tipagem Dinâmica de Python
+
+As duas funcionalidades se baseiam na capacidade de se inferir e definior o tipo de variáveis sem que seja necessário definir quais são seus tipos.
+
+Haskell Type Inference: Os tipos são definidos no tempo de compilação
+Python Dynamic Typing: Os tipos são definidos no tempo de execução.
+
+Critérios Externos:
+
+Desenvolvimento Rápido / Baixo tempo de treinamento / Portabilidade:: –Não se aplica
+Confiabilidade e Segurança: Pelos tipos serem conhecidos em tempo de compilação, isso dá uma vantagem ao Haskell no quesito de segurança, já que, durante o runtime, não precisamos nos preocupar com o valor que a variável irá assumir, já que já é conhecido, diferente de Python.
+Fácil Manutenção: Novamente, como já sabemos o tipo após a compilação, é muito mais simples em haskell buscar pelos possíveis erros, já que em Python, por exemplo, até mesmo o teste de tipo da variável, caso mal implementado, pode mudar o seu tipo e o erro não é registrado. 
+Eficiência: Haskell,  como o tipo já está computado, o runtime fica mais veloz, enquanto que em python, durante a execução do programa, o interpretador estará ocupado inferindo os tipos..
+Reusabilidade: Python tem uma vantagem nisso, pois justamente por interpretar em runtime, dependendo do seu uso, ele pode assumir o tipo correto para cada necessidade, enquanto Haskell já terá o tipo definido na compilação, que é  imutável durante a execução.
+Valor pedagógico: Ambos apresentam um grande valor pedagógico para ensinamento de tempos de compilação e interpretações que o compilador pode fazer.
+
+Critérios Internos:
+
+Legibilidade: –Não se aplica
+Facilidade de escrever: Em ambos é necessário simplesmente não definir um tipo
+Simplicidade: As duas funcionalidades fazem exatamente o que prometem
+Ortogonalidade / Abstração: Em Haskell, o compilador pode inferir também os tipos definidos no código, o que é uma grande vantagem para a generalização e abstração.
+Consistência: Haskell é mais consistente, novamente pelo tempo de amarração, mas isso não necessariamente é só uma vantagem, como percebemos pela vantagem da portabilidade de Python.
+Expressividade: –Não se aplica
+
+Exemplos:
+
+Haskell:
+
+type Aluno = (String, Float, Float)
+nome :: Aluno -> String
+nome (x,_,_) = x
+p1 :: Aluno -> Float
+p1 (_,y,_) = y
+p2 :: Aluno -> Float
+p2 (_,_,z) = z
+
+a = ("Alan",0,1)
+b = ("Bruna",10,5)
+c = ("Carlos",7.6,4)
+alunos = [a,b,c]
+
+nomes :: [Aluno] -> [String]
+nomes l = map nome l
+
+main = print(nomes alunos)
+
+–No código, o compilador infere o tipo de a, b, c e de alunos.
+
+Python:
+
+valor = 9
+print(type(valor))
+valor /= 2
+print(type(valor))
+
+-No código, demonstramos a determinação de tipos em runtime, com aluno mudando de tipo conforme as necessidades.
+
+Fontes:
+
+https://towardsdatascience.com/dynamic-typing-in-python-307f7c22b24e
+https://wiki.haskell.org/Type_inference
+https://www.youtube.com/watch?v=mwfYA0W8nTg&list=PLf6RUGZQ7tMxGau_f8mw4pGHMTcKOigSs
+https://stackoverflow.com/questions/26035893/the-nature-of-haskell-type-system-static-dynamic-manual-inferred#:~:text=Type%20inference%20is%20done%20at,a%20%22static%22%20type%20system.
