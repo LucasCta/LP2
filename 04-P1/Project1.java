@@ -16,7 +16,6 @@ class Project1 {
 class ArrFigures extends JFrame {
     private int mouse[] = {0,0};
     private Figure focus = null;
-    private Random rand = new Random();
     private ArrayList<Figure> figuresList = new ArrayList<Figure>();
     private ArrayList<Color> colorList = new ArrayList<Color>(){{
         add(Color.blue);
@@ -26,34 +25,35 @@ class ArrFigures extends JFrame {
         add(Color.white);
         add(Color.black);
     }};
-    private ArrayList<Button> butFigs = new ArrayList<Button>(){{
-        add(new Button(0, new Rect(30,40,30,30, Color.darkGray, Color.darkGray)));
-        add(new Button(1, new Ellipse(70,40,30,30, Color.darkGray, Color.darkGray)));
-        add(new Button(2, new RHexagon(45,100,15,0, Color.darkGray, Color.darkGray)));
-        add(new Button(3, new Triangle(85,105,15,30, Color.darkGray, Color.darkGray)));   
-    }};
-    private ArrayList<Button> butBgColors = new ArrayList<Button>(){{ for(int i = 0; i < 6; i++){
-        add(new Button(i, new Rect(20+i*15,130,10,10, Color.darkGray, colorList.get(i))));
-    }}};
-    private ArrayList<Button> butLnColors = new ArrayList<Button>(){{ for(int i = 0; i < 6; i++){
-            add(new Button(i, new Rect(20+i*15,150,10,10, colorList.get(i), Color.darkGray)));
-    }}};
-    private ArrayList<Button> secondaryMenu = new ArrayList<Button>(){{
-        add(new Button(0, new Rect(30,170,60,20,Color.darkGray,Color.lightGray)));
-        add(new Button(1, new Ellipse(40,175,10,10,Color.darkGray,Color.orange)));
-        add(new Button(2, new Ellipse(55,175,10,10,Color.darkGray,Color.red)));
-        add(new Button(2, new Ellipse(70,175,10,10,Color.darkGray,Color.green)));
-    }};
-    private Figure menu_canvas = new Rect(0,0,120,170, Color.darkGray, Color.LIGHT_GRAY);
-    private Button focus_butLn = this.butLnColors.get(0);
-    private Button focus_butBg = this.butBgColors.get(0);
     private Button focus_butFig;
-    private void addFigure(int type, int a, int b, int c, int d, int e, int f){
+    private ArrayList<Button> menu = new ArrayList<Button>(){{
+        add(new Button(0, new Rect(0,0,120,170, Color.darkGray, Color.LIGHT_GRAY)));
+        add(new Button(0, new Rect(30,170,60,20,Color.darkGray,Color.lightGray)));
+        add(new Button(1, new Rect(30,40,30,30, Color.darkGray, Color.darkGray)));
+        add(new Button(1, new Ellipse(70,40,30,30, Color.darkGray, Color.darkGray)));
+        add(new Button(1, new RHexagon(45,100,15,0, Color.darkGray, Color.darkGray)));
+        add(new Button(1, new Triangle(85,105,15,30, Color.darkGray, Color.darkGray)));
+        for(int i = 0; i < 6; i++){
+            add(new Button(2, new Rect(20+i*15,150,10,10, colorList.get(i), Color.darkGray)));
+        }
+        for(int i = 0; i < 6; i++){
+            add(new Button(3, new Rect(20+i*15,130,10,10, Color.darkGray, colorList.get(i))));
+        }
+        add(new Button(4, new Ellipse(40,175,10,10,Color.darkGray,Color.orange)));
+        add(new Button(5, new Ellipse(55,175,10,10,Color.darkGray,Color.red)));
+        add(new Button(6, new Ellipse(70,175,10,10,Color.darkGray,Color.green)));
+    }};
+    private Button focus_butLn = this.menu.get(6);
+    private Button focus_butBg = this.menu.get(12);
+    private Random rand = new Random();
+    private void addFigure(int type, int c1, int c2){
+        int c = rand.nextInt(30)+20;
+        int d = rand.nextInt(30)+20;
         switch (type) {
-            case 0: figuresList.add(new Rect(a-2,b-2,c+10,d+10, colorList.get(e), colorList.get(f))); break;
-            case 1: figuresList.add(new Ellipse(a-10,b-10,c+10,d+10, colorList.get(e), colorList.get(f))); break;
-            case 2: figuresList.add(new RHexagon(a,b,c,d, colorList.get(e), colorList.get(f))); break;
-            case 3: figuresList.add(new Triangle(a,b,c,d, colorList.get(e), colorList.get(f))); break;
+            case 0: figuresList.add(new Rect(mouse[0]-2,mouse[1]-2,c+10,d+10, colorList.get(c1), colorList.get(c2))); break;
+            case 1: figuresList.add(new Ellipse(mouse[0]-10,mouse[1]-10,c+10,d+10, colorList.get(c1), colorList.get(c2))); break;
+            case 2: figuresList.add(new RHexagon(mouse[0],mouse[1],c,d, colorList.get(c1), colorList.get(c2))); break;
+            case 3: figuresList.add(new Triangle(mouse[0],mouse[1],c,d, colorList.get(c1), colorList.get(c2))); break;
         } return;
     }
     ArrFigures () {
@@ -83,44 +83,33 @@ class ArrFigures extends JFrame {
         );        
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed (MouseEvent e) {
-                for (Button but: butFigs) {
-                    if (but.clicked(e.getX(),e.getY())){
-                        focus_butFig = but;
-                    }
-                }
-                for (Button but: butLnColors) {
-                    if (but.clicked(e.getX(),e.getY())){
-                        focus_butLn= but;
-                    }
-                }
-                for (Button but: butBgColors) {
-                    if (but.clicked(e.getX(),e.getY())){
-                        focus_butBg = but;
-                    }
-                }
-                if (menu_canvas.clicked(e.getX(),e.getY()) == false && focus_butFig != null
-                    && secondaryMenu.get(0).clicked(e.getX(),e.getY()) == false){
-                    addFigure(focus_butFig.indice, mouse[0], mouse[1],
-                                rand.nextInt(30)+20,rand.nextInt(30)+20,
-                                focus_butLn.indice, focus_butBg.indice);
-                    focus_butFig = null;
-                } else if (secondaryMenu.get(0).clicked(e.getX(),e.getY())){
-                    if (secondaryMenu.get(1).clicked(e.getX(),e.getY())){
-                        if (focus != null){
-                            figuresList.remove(focus); 
-                            focus = null;
+                if (menu.get(0).clicked(e.getX(),e.getY()) || menu.get(1).clicked(e.getX(),e.getY())){
+                    for (Button but: menu) {
+                        if (but.clicked(e.getX(),e.getY())){
+                            switch (but.indice) {
+                                case 1: focus_butFig = but; break;
+                                case 2: focus_butLn= but; break;
+                                case 3: focus_butBg = but; break;
+                                case 4: 
+                                    if (focus != null){
+                                        figuresList.remove(focus); 
+                                        focus = null;
+                                    } break;
+                                case 5:
+                                    figuresList.clear();
+                                    focus = null;
+                                    break; 
+                                case 6: 
+                                    System.out.print("Salvando");
+                                    break;
+                            }
                         }
                     }
-                    if (secondaryMenu.get(2).clicked(e.getX(),e.getY())){
-                        figuresList.clear();
-                        focus = null;
-                    }
-                    if (secondaryMenu.get(3).clicked(e.getX(),e.getY())){
-                        System.out.print("Salvando");
-                    }
-                } else { 
-                    if (focus != null) focus = null;
+                } else if (focus_butFig != null) {
+                    addFigure(menu.indexOf(focus_butFig)-2,menu.indexOf(focus_butLn)-6,menu.indexOf(focus_butBg)-12);
+                    focus_butFig = null;
                 }
+                focus = null;
                 for (Figure fig: figuresList) {
                     if (fig.clicked(e.getX(),e.getY())){
                         focus = fig;
@@ -156,24 +145,12 @@ class ArrFigures extends JFrame {
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
-                    int x = mouse[0];
-                    int y = mouse[1];
-                    int w = rand.nextInt(30) + 20;
-                    int h = rand.nextInt(30) + 20;
                     int c1 = rand.nextInt(6);
                     int c2 = rand.nextInt(6);
-                    if (evt.getKeyChar() == 'r') {
-                        addFigure(0,x,y,w,h,c1,c2);
-                    }
-                    if (evt.getKeyChar() == 'e') {
-                        addFigure(1,x,y,w,h,c1,c2);
-                    }
-                    if (evt.getKeyChar() == 'h'){
-                        addFigure(2,x,y,w,h,c1,c2);
-                    }                    
-                    if (evt.getKeyChar() == 't'){
-                        addFigure(3,x,y,w,h,c1,c2);
-                    }
+                    if (evt.getKeyChar() == 'r') addFigure(0,c1,c2);
+                    if (evt.getKeyChar() == 'e') addFigure(1,c1,c2);
+                    if (evt.getKeyChar() == 'h') addFigure(2,c1,c2);
+                    if (evt.getKeyChar() == 't') addFigure(3,c1,c2);
                     if (evt.getKeyChar() ==  KeyEvent.VK_TAB){
                         if (figuresList.size() != 0){
                             focus = figuresList.get(0); 
@@ -219,18 +196,10 @@ class ArrFigures extends JFrame {
         for (Figure fig: this.figuresList) {
             fig.paint(g, focus == fig);
         }
-        for (Button but: this.secondaryMenu) {
-            but.paint(g, false);
-        }
-        menu_canvas.paint(g, false);
-        for (Button but: this.butFigs) {
-            but.paint(g, focus_butFig == but);
-        }
-        for (Button but: this.butLnColors) {
-            but.paint(g, focus_butLn == but);
-        }
-        for (Button but: this.butBgColors) {
-            but.paint(g, focus_butBg == but);
+        for (Button but: this.menu) {
+            but.paint(g,focus_butFig == but || 
+                        focus_butLn == but || 
+                        focus_butBg == but);
         }
     }
 }
