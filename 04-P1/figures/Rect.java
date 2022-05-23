@@ -36,6 +36,11 @@ public class Rect extends Figure{
             this.w, this.h, this.x, this.y);
         System.out.format("Background Color: %s, Line Color: %s",this.bgColor,this.lineColor);
     }
+    public String save (){
+        String c1 = String.format("#%06x", this.bgColor.getRGB() & 0xFFFFFF);
+        String c2 = String.format("#%06x", this.lineColor.getRGB() & 0xFFFFFF);
+        return String.format("<rect x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" style=\"fill:%s;stroke:%s;stroke-width:1\"/>\n",this.x,this.y,this.w,this.h,c1,c2);
+    }
     public void paint (Graphics g, boolean focus) {
         Graphics2D g2d = (Graphics2D) g;
         if (this.bgColor != null){

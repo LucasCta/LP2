@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import figures.*;
 
 class Project1 {
@@ -50,10 +54,14 @@ class ArrFigures extends JFrame {
         int c = rand.nextInt(30)+20;
         int d = rand.nextInt(30)+20;
         switch (type) {
-            case 0: figuresList.add(new Rect(mouse[0]-2,mouse[1]-2,c+10,d+10, colorList.get(c1), colorList.get(c2))); break;
-            case 1: figuresList.add(new Ellipse(mouse[0]-10,mouse[1]-10,c+10,d+10, colorList.get(c1), colorList.get(c2))); break;
-            case 2: figuresList.add(new RHexagon(mouse[0],mouse[1],c,d, colorList.get(c1), colorList.get(c2))); break;
-            case 3: figuresList.add(new Triangle(mouse[0],mouse[1],c,d, colorList.get(c1), colorList.get(c2))); break;
+            case 0: figuresList.add(new Rect(mouse[0]-2,mouse[1]-2,c+10,d+10, 
+                        colorList.get(c1), colorList.get(c2))); break;
+            case 1: figuresList.add(new Ellipse(mouse[0]-10,mouse[1]-10,c+10,d+10, 
+                        colorList.get(c1), colorList.get(c2))); break;
+            case 2: figuresList.add(new RHexagon(mouse[0],mouse[1],c,d, 
+                        colorList.get(c1), colorList.get(c2))); break;
+            case 3: figuresList.add(new Triangle(mouse[0],mouse[1],c,d, 
+                        colorList.get(c1), colorList.get(c2))); break;
         } return;
     }
     ArrFigures () {
@@ -89,7 +97,7 @@ class ArrFigures extends JFrame {
                             switch (but.indice) {
                                 case 1: focus_butFig = but; break;
                                 case 2: focus_butLn= but; break;
-                                case 3: focus_butBg = but; break;
+                                case 3:focus_butBg = but; break;
                                 case 4: 
                                     if (focus != null){
                                         figuresList.remove(focus); 
@@ -99,14 +107,24 @@ class ArrFigures extends JFrame {
                                     figuresList.clear();
                                     focus = null;
                                     break; 
-                                case 6: 
-                                    System.out.print("Salvando");
+                                case 6:
+                                    try {
+                                        String output = "<svg width=\"500\" height=\"500\">\n";
+                                        for (Figure fig: figuresList){
+                                            output += fig.save();
+                                        } output += "</svg>";
+                                        Path path = Paths.get("saved.svg");
+                                        Files.writeString(path, output, StandardCharsets.UTF_8);
+                                    } catch (IOException x) {
+                                        System.out.print("Invalid Path");
+                                    }
                                     break;
                             }
                         }
                     }
                 } else if (focus_butFig != null) {
-                    addFigure(menu.indexOf(focus_butFig)-2,menu.indexOf(focus_butLn)-6,menu.indexOf(focus_butBg)-12);
+                    addFigure(menu.indexOf(focus_butFig)-2,menu.indexOf(focus_butLn)-6,
+                            menu.indexOf(focus_butBg)-12);
                     focus_butFig = null;
                 }
                 focus = null;

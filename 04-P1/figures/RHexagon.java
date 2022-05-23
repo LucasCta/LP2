@@ -59,6 +59,13 @@ public class RHexagon extends Figure{
       }
       System.out.format("\nBackground Color: %s, Line Color: %s",this.bgColor,this.lineColor);
     }
+    public String save(){
+      String c1 = String.format("#%06x", this.bgColor.getRGB() & 0xFFFFFF);
+      String c2 = String.format("#%06x", this.lineColor.getRGB() & 0xFFFFFF);
+      return String.format("<polygon points=\"%d,%d %d,%d %d,%d %d,%d %d,%d %d,%d\" style=\"fill:%s;stroke:%s;stroke-width:1\"/>\n",
+                            this.vx[0],this.vy[0],this.vx[1],this.vy[1],this.vx[2],this.vy[2],
+                            this.vx[3],this.vy[3],this.vx[4],this.vy[4],this.vx[5],this.vy[5],c1,c2);
+    }
     public void paint (Graphics g, boolean focus) {
         Graphics2D g2d = (Graphics2D) g;
         if (this.bgColor != null){

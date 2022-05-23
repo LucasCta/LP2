@@ -26,6 +26,14 @@ public class Ellipse extends Figure{
             this.w, this.h, this.x, this.y);
         System.out.format("Background Color: %s, Line Color: %s",this.bgColor,this.lineColor);
     }
+    public String save (){
+        double eCenter[] = {(this.x*2+this.w)/2,((this.y*2)+this.h)/2};
+        double a = this.w/2;
+        double b = this.h/2;
+        String c1 = String.format("#%06x", this.bgColor.getRGB() & 0xFFFFFF);
+        String c2 = String.format("#%06x", this.lineColor.getRGB() & 0xFFFFFF);
+        return String.format("<ellipse cx=\"%f\" cy=\"%f\" rx=\"%f\" ry=\"%f\" style=\"fill:%s;stroke:%s;stroke-width:1\"/>\n",eCenter[0],eCenter[1],a,b,c1,c2);
+    }
     public void paint (Graphics g, boolean focus) {
         Graphics2D g2d = (Graphics2D) g;
         if (this.bgColor != null){

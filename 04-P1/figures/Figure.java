@@ -7,6 +7,7 @@ public abstract class Figure implements IVisible, Serializable {
     protected int x, y;
     public Color lineColor, bgColor;
     public abstract void sizeChange (int a, boolean b);
+    public abstract String save();
     public void drag (int x, int y){
         this.x += x;
         this.y += y;
