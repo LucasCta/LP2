@@ -96,8 +96,18 @@ class ArrFigures extends JFrame {
                         if (but.clicked(e.getX(),e.getY())){
                             switch (but.indice) {
                                 case 1: focus_butFig = but; break;
-                                case 2: focus_butLn= but; break;
-                                case 3:focus_butBg = but; break;
+                                case 2: 
+                                    focus_butLn= but; 
+                                    if (focus != null){
+                                        focus.lineColor = colorList.get(menu.indexOf(focus_butLn)-6);
+                                    }
+                                    break;
+                                case 3: 
+                                    focus_butBg = but; 
+                                    if (focus != null){
+                                        focus.bgColor = colorList.get(menu.indexOf(focus_butBg)-12);
+                                    }
+                                    break;
                                 case 4: 
                                     if (focus != null){
                                         figuresList.remove(focus); 
