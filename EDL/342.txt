@@ -1,3 +1,13 @@
+{-
+
+Ideia:
+
+Temos uma base de dados não segura, que guarda diretamente o usuário e a senha.
+
+Usamos as funções map e foldr para criar uma nova base de dados segura, com o sistema de "Salt and Hash", assim como uma função de login, usando filter, para testar o login.
+
+-}
+
 import Data.Hashable
 import System.Random
 import System.IO.Unsafe
