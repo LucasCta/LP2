@@ -32,7 +32,7 @@ public class Ellipse extends Figure{
         double b = this.h/2;
         String c1 = String.format("#%06x", this.bgColor.getRGB() & 0xFFFFFF);
         String c2 = String.format("#%06x", this.lineColor.getRGB() & 0xFFFFFF);
-        return String.format("<ellipse cx=\"%f\" cy=\"%f\" rx=\"%f\" ry=\"%f\" style=\"fill:%s;stroke:%s;stroke-width:1\"/>\n",eCenter[0],eCenter[1],a,b,c1,c2);
+        return String.format("<ellipse cx=\"%f\" cy=\"%f\" rx=\"%f\" ry=\"%f\" style=\"fill:%s;stroke:%s;stroke-width:1\"/>\n",eCenter[0],eCenter[1],a,b,c1,c2).replace(',','.');
     }
     public void paint (Graphics g, boolean focus) {
         Graphics2D g2d = (Graphics2D) g;
